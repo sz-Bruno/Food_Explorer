@@ -8,7 +8,8 @@ height: 100vh;
 display: grid;
 grid-template-areas: 
 "header"
-"content";
-grid-template-rows: 104px auto;
+"content"
+"footer";
+grid-template-rows: 104px auto 77px;
 
 `

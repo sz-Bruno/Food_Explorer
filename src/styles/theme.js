@@ -13,6 +13,7 @@ COLORS:{
     FORM_BLUE:"#001119",
     HEADER_GRAY:"#E1E1E6",
     HEADER_INPUT:"#0D1D25",
+    SMOKE_GREY:"rgba(255, 255, 255, 0.3)"
     
 }
 

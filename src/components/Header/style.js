@@ -34,4 +34,37 @@ gap:32px;
     
     color:${({theme})=>theme.COLORS.HEADER_GRAY};
 }
+
+
+`
+
+export const ButtonHeader= styled.button`
+width: 216px;
+height: 56px;
+display: flex;
+align-items: center;
+gap:11px;
+justify-content: center;
+border-radius: 5px;
+border: none;
+padding:12px 32px 12px 32px;
+background-color: ${({theme})=>theme.COLORS.RED};
+
+>p{
+color: ${({theme})=>theme.COLORS.WHITE};
+font-family: 'Poppins', sans-serif;
+font-weight: 500;
+font-size: 14px;
+line-height: 24px;
+}
+
+>img{
+    width: 26px;
+    
+}
+`
+export const ButtonSignOut= styled.button`
+background: transparent;
+border: none;
+
 `
