@@ -1,0 +1,20 @@
+
+
+export default {
+COLORS:{
+    BACKGROUND_PAGE:"#000A0F",
+    RED:"#92000E",
+    WHITE:"#FFFFFF",
+    MARINE_BLUE:"#00111A",
+    LIGHT_GRAY:"hsla(0, 0%, 100%, 0.3)",
+    GREEN_MONEY:"#82F3FF",
+    GREY_INPUT:"#C4C4CC",
+    PLACEHOLDER:"#7C7C8A",
+    FORM_BLUE:"#001119",
+    HEADER_GRAY:"#E1E1E6",
+    HEADER_INPUT:"#0D1D25",
+    
+}
+
+
+}
