@@ -1,7 +1,7 @@
 import{HeaderWrapper,ButtonHeader,ButtonSignOut} from "./style"
-import logo from "../../assets/explorer_logo.svg"
-import buttonHeader from "../../assets/button_header.svg"
-import signOutButton from "../../assets/sign_out.svg"
+import logo from "../../assets/images/explorer_logo.svg"
+import buttonHeader from "../../assets/images/button_header.svg"
+import signOutButton from "../../assets/images/sign_out.svg"
 import { InputHeader } from "../InputHeader"
 import {FiSearch} from "react-icons/fi"
 

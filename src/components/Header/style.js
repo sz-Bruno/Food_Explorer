@@ -10,6 +10,7 @@ align-items: center;
 padding:0px 125px;
 gap:32px;
 
+
 >div{
     display: flex;
     align-items: center;

@@ -1,5 +1,5 @@
 import{FooterWrapper,Copyright} from "./style"
-import logoGrey from "../../assets/explorer_logo_grey.svg"
+import logoGrey from "../../assets/images/explorer_logo_grey.svg"
 
 
 export function Footer(){

@@ -2,7 +2,7 @@ import {SignInWrapper,Form,Background} from "./style"
 import { Input } from "../../components/Input"
 import { Button } from "../../components/Button"
 import { ButtonText } from "../../components/ButtonText"
-import logo from "../../assets/explorer_logo.svg"
+import logo from "../../assets/images/explorer_logo.svg"
 export function SignIn(){
     return(
         <SignInWrapper>
