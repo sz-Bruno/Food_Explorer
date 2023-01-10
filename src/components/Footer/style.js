@@ -5,7 +5,7 @@ background-color: ${({theme})=>theme.COLORS.FORM_BLUE};
 display:flex;
 grid-area: footer;
 align-items: center;
-padding:0px 125px;
+padding:0px 116px;
 justify-content: space-between;
 
 >div{

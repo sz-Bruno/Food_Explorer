@@ -15,7 +15,10 @@ COLORS:{
     HEADER_INPUT:"#0D1D25",
     SMOKE_GREY:"rgba(255, 255, 255, 0.3)",
     LOGO_CANDIE:"#091E26 100%, #00131C 100%",
-    CARD_DISH:"rgba(0, 0, 0, 0.32)"
+    CARD_DISH:"rgba(0, 0, 0, 0.32)",
+    LIGHT_RED:"#AB4D55",
+    CLICKED_COLOR:"rgba(255, 255, 255, 0.05)",
+    NO_CLICKED_COLOR:"#000C12"
 
     
 }

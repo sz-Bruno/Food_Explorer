@@ -7,7 +7,11 @@ export const ButtonWrapper=styled.button`
 
 width: 100%;
 height: 48px;
-padding: 12px 134px;
+padding: 12px;
+display: flex;
+justify-content: center;
+align-items: center;
+gap:11px;
 background-color: ${({theme})=>theme.COLORS.RED};
 border: none;
 border-radius: 5px;

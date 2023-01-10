@@ -4,8 +4,9 @@ export const PaymentWrapper= styled.section`
 grid-area: content;
 display: flex;
 width: 100%;
-padding:0px 125px 0 123px;
-gap:198px;
+padding:0px 116px 0 116px;
+justify-content: space-between;
+
 
 
 `
