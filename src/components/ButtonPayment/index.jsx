@@ -2,11 +2,11 @@
 import {ButtonPaymentWrapper} from "./style"
 
 
-export function ButtonPayment({isactive=false,disabled,title,img,...rest}){
+export function ButtonPayment({isactive,disabled,title,img,...rest}){
 return(
-    <ButtonPaymentWrapper {...rest}  isactive={isactive}>
+    <ButtonPaymentWrapper {...rest} disabled={disabled} isactive={isactive}>
         <img src={img}  />
-         <p>{disabled? 'Processando...': title}</p>
+         <p>{title}</p>
          
     </ButtonPaymentWrapper>
 )
