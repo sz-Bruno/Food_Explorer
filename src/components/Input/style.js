@@ -6,7 +6,7 @@ export const InputWrapper= styled.div`
 width: 100%;
  display: flex;
  flex-direction:column;
- gap:5px;
+
  margin-bottom: 32px;
 
  >label{
@@ -14,7 +14,7 @@ width: 100%;
     font-size: 16px;
     line-height: 16px;
     font-family: 'Roboto', sans-serif;
-
+   margin-bottom: 5px;
  }
 
  >input{

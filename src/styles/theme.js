@@ -18,7 +18,9 @@ COLORS:{
     CARD_DISH:"rgba(0, 0, 0, 0.32)",
     LIGHT_RED:"#AB4D55",
     CLICKED_COLOR:"rgba(255, 255, 255, 0.05)",
-    NO_CLICKED_COLOR:"#000C12"
+    NO_CLICKED_COLOR:"#000C12",
+    BORDER:"#192227",
+    TAG_COLOR:"rgba(255, 255, 255, 0.1)",
 
     
 }

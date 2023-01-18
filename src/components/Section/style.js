@@ -6,6 +6,8 @@ width: 100%;
 grid-area: content;
 margin-top: 35px;
 
+
+
 >h1{
    
     margin-bottom: 35px;
