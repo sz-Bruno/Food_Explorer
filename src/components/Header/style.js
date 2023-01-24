@@ -11,6 +11,12 @@ padding:0px 116px;
 gap:32px;
 
 
+.Out_button{
+    background: transparent;
+border: none;
+}
+
+
 >div{
     display: flex;
     align-items: center;
@@ -63,9 +69,4 @@ line-height: 24px;
     width: 26px;
     
 }
-`
-export const ButtonSignOut= styled.button`
-background: transparent;
-border: none;
-
 `

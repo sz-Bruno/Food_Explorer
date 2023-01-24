@@ -6,6 +6,7 @@ import { Home } from './pages/Home'
 import {PaymentArea} from "./pages/PaymentArea"
 import {OrderStatus} from "./pages/OrderStatus"
 import { EditOrder } from './pages/EditOrder'
+import { DishDetails } from './pages/DishDetails'
 import GloalStyle from "./styles/global"
 import { ThemeProvider } from 'styled-components'
 import theme from './styles/theme'
@@ -14,7 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GloalStyle/>
-      <EditOrder/>
+      <PaymentArea/>
     </ThemeProvider>
     
   </React.StrictMode>,

@@ -1,61 +1,60 @@
 import { Header } from "../../components/Header"
 import { Footer } from "../../components/Footer"
 import { Section } from "../../components/Section"
-import {EditWrapper,Content,Button,Upload,ImageArea,Ingredients_Price,TagArea,Description} from "./style"
+import {EditWrapper,Content,Upload,ImageArea,Ingredients_Price,InfoArea,Description,Form,Button} from "./style"
 import { InputSection } from "../../components/InputSection"
 import { TagItem } from "../../components/TagItem"
 import { Input } from "../../components/Input"
-import Left from "../../assets/images/back_button.svg"
+import { Buttonback } from "../../components/ButtonBack"
 import {FiUpload} from 'react-icons/fi'
 export function EditOrder(){
     return(
         <EditWrapper>
-           <Header/>
+             <Header/>
                <Content>
-                   <Button>
-                      <img src={Left} alt="voltar" />
-                      <h1>voltar</h1>
-                   </Button>
+                   <Buttonback/>
                    <Section title='Editar prato'>
-                    <ImageArea>
-                       <div>
-                         <p>Imagem do prato</p>
+                     <Form >
+                            <ImageArea>
+                                <div>
+                                  <p>Imagem do prato</p>
                          
-                          <Upload>
-                              <label htmlFor="upload">
-                                <FiUpload/>
-                               <input type="file" name="" id="upload" />
-                                 Selecione imagem
-                              </label>
-                        
-                          </Upload>
-                       </div>
-                       <Input title='Nome' placeholder='Ex.:Salada Caesar'/>
-                    </ImageArea>
+                                   <Upload>
+                                       <label htmlFor="upload">
+                                             <FiUpload/>
+                                          <input type="file" name="" id="upload" />
+                                             Selecione imagem
+                                       </label>
+                                   </Upload>
+                                </div>
+                                <Input title='Nome' placeholder='Ex.:Salada Caesar'/>
+                            </ImageArea>
                     
-                    <Ingredients_Price>
-                    <TagArea>
-                       <p>Ingredientes</p>
-                         <InputSection>
-                         <TagItem isNew placeholder='adicionar'/>
-                         <TagItem/>
-                         <TagItem/>
-                         </InputSection>
-                    </TagArea>
-                        <div>
-                         <Input title='preço'/>
-                        </div>
-                    </Ingredients_Price>
+                           <Ingredients_Price>
+                                <InfoArea>
+                                    <p>Ingredientes</p>
+                                    <InputSection>
+                                        <TagItem isNew placeholder='adicionar'/>
+                                        <TagItem/>
+                                        <TagItem/>
+                                    </InputSection>
+                                </InfoArea>
+                                <div>
+                                <Input title='preço'/>
+                                </div>
+                          </Ingredients_Price>
                       
-                        <TagArea>
-                            <p>Descrição</p>
-                            <Description/>
-
-                            
-                        </TagArea>
+                           <InfoArea>
+                                <p>Descrição</p>
+                                <Description/>
+                            </InfoArea>
+                        </Form>
+                        <Button >
+                            <h1>Adicionar pedido</h1>
+                        </Button>
                    </Section>
                </Content>
-           <Footer/>
+             <Footer/>
         </EditWrapper>
 
     )

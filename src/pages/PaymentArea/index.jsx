@@ -15,7 +15,7 @@ import buttonHeader from "../../assets/images/button_header.svg"
 import Ravanello from "../../assets/images/ravanello.png"
 import Pix from "../../assets/images/pix_image.svg"
 import Credit from "../../assets/images/credit_card.svg"
-import { useState } from "react"
+import { useState,useEffect } from "react"
 
 export function PaymentArea(){
 
@@ -28,11 +28,40 @@ export function PaymentArea(){
   const [isButtonCardDisabled,setisButtonCardDisabled]= useState(false)
   const [isButtonPixActived,setisButtonPixActived]= useState(true)
   const [isButtonCardActived,setisButtonCardActived]= useState(false)
-  const [TotalPrice, setTotalPrice] = useState(199.88)
-
-   
+  const [total_price, settotal_price]= useState()
+  const [Dish,setDish]= useState([
+    {
+    name:"Salada Ravanello",
+    image:Ravanello,
+    qtd:"1",
+    price: 42.44
+  },
+  {
+    name:"Selada Ravanello",
+    image:Ravanello,
+    qtd:"1",
+    price: 49.97
+  },
+  {
+    name:"Silada Ravanello",
+    image:Ravanello,
+    qtd:"1",
+    price:  70.84
+  },
+  {
+    name:"Solada Ravanello",
+    image:Ravanello,
+    qtd:"1",
+    price:  50.43
+  },
+  {
+    name:"Sulada Ravanello",
+    image:Ravanello,
+    qtd:"1",
+    price:  50.43
+  },
+  ])
   
-
   function HandleCardOption(){
     setisPixVisible(false)
     setisCardVisible(true)
@@ -54,6 +83,7 @@ export function PaymentArea(){
     setisButtonCardActived(false)
   }
   function HandlePayment(){
+    alert(`Total a pagar R$ ${total_price}`)
     setisPixVisible(false)
     setisCardVisible(false)
     setisClockVisible(true)
@@ -78,47 +108,55 @@ export function PaymentArea(){
     
   }
     
+   
+    
+    const HandlePrice=(array)=>{
+      let total=0
+
+      for (let i=0; i<array.length;i++){
+
+        total+= array[i]
+         
+      }
+
+       total=total.toFixed(2)
+      settotal_price( total)
+   
+    }
+
+    const prices= Dish.map(item=>item.price)
+    
+   useEffect(()=>{
+
+      HandlePrice(prices)
+    },[prices])
+     
+    const HandleRemove=(name)=>{
+
+      const newDish=Dish.filter(item=>item.name!==name)
+      setDish(newDish)
+       
+      }
+     
+    
     
     return(
         <PaymentWrapper>
             <Header/>
             <Payment >
-                <Section title="Meu pedido"  total={TotalPrice} >
-                    <Description 
-                    image={Ravanello}
-                    qtd="1"
-                    name="Salada Ravanello"
-                    price="R$ 49,97"
+                <Section title="Meu pedido"  total={total_price}   >
 
-                    />
-                    <Description 
-                    image={Ravanello}
-                    qtd="1"
-                    name="Salada Ravanello"
-                    price="R$ 49,97"
-
-                    />
-                    <Description 
-                    image={Ravanello}
-                    qtd="1"
-                    name="Salada Ravanello"
-                    price="R$ 49,97"
-
-                    />
-                    <Description 
-                    image={Ravanello}
-                    qtd="1"
-                    name="Salada Ravanello"
-                    price="R$ 49,97"
-
-                    />
-                    <Description 
-                    image={Ravanello}
-                    qtd="1"
-                    name="Salada Ravanello"
-                    price="R$ 49,97"
-
-                    />
+                  {Dish.map((item,id)=>
+                  <Description
+                    onClick={()=>HandleRemove(item.name)}
+                   key={id}
+                  image={item.image}
+                  qtd={item.qtd}
+                  name={item.name}
+                  price={item.price}
+                  />
+                  )}
+                    
                  </Section>
 
                 <Section title="Pagamento">

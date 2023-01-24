@@ -8,39 +8,20 @@ display: grid;
 grid-template-areas: "header" "content" "footer" ;
 grid-template-rows: 104px auto 77px; 
 
-
-
 `
+
 export const Content= styled.div`
 width: 100%;
 grid-area: content;
 padding: 0px 116px;
+margin-bottom: 194px;
+
 >div{
     display: flex;
 }
 
 `
-export const Button= styled.button`
-grid-area: content;
-width: 100px;
-height: 50px;
-display: flex;
-gap:11px;
-align-items: center;
-margin-top: 24px;
-background: none;
-border: none;
 
-h1{
-    font-family: 'Poppins', sans-serif;
-    font-weight: 500;
-    font-size:24px;
-    line-height:33px;
-    color:${({theme})=>theme.COLORS.HEADER_GRAY};
-}
-
-
-`
 export const Upload= styled.div`
  width: 220px;
  height: 48px;
@@ -92,10 +73,9 @@ gap:32px;
    
 }
 
-
-
 `
-export const TagArea= styled.div`
+
+export const InfoArea= styled.div`
 
 width: 100%;
 display: flex;
@@ -109,29 +89,51 @@ p{
 }
 
 `
+
 export const Ingredients_Price= styled.div`
 
 display: flex;
-gap:48px
+gap:48px;
 
 `
-
-
-
-
-
-
 export const Description= styled.textarea`
 width: 100%;
 height: 196px;
 background: none;
-margin-bottom: 194px;
 border:1px solid ${({theme})=>theme.COLORS.WHITE};
- border-radius: 5px;
- color:${({theme})=>theme.COLORS.GREY_INPUT};
-    font-size: 16px;
-    line-height: 16px;
-    font-family: 'Roboto', sans-serif;
-    padding: 5px;
+border-radius: 5px;
+color:${({theme})=>theme.COLORS.GREY_INPUT};
+font-size: 16px;
+line-height: 16px;
+font-family: 'Roboto', sans-serif;
+padding: 5px;
+
+`
+export const Form = styled.form`
+width: 100%;
+
+>div{
+    display: flex;
+}
+
+`
+export const Button = styled.button`
+width: 357px;
+height: 48px;
+padding:12px 32px;
+border: 1px solid white;
+border-radius: 5px;
+background-color: ${({theme})=>theme.COLORS.TAG_COLOR};
+margin-top: 24px;
+margin-left: 763px;
+
+
+h1{
+    color:${({theme})=>theme.COLORS.WHITE};
+    font-size: 14px;
+    line-height: 24px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
 
 `
