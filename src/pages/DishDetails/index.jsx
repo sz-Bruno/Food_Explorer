@@ -56,7 +56,7 @@ export function DishDetails(){
         <DetailsWrapper>
             <Header onClick={HandleCart}/>
             <Content>
-                <Buttonback/>
+                <Buttonback />
                 <div>
                    <img src={Ravanello} alt="Imagem da salada ravanello" />
                   <Description>

@@ -7,7 +7,15 @@ import { TagItem } from "../../components/TagItem"
 import { Input } from "../../components/Input"
 import { Buttonback } from "../../components/ButtonBack"
 import {FiUpload} from 'react-icons/fi'
+import { useState } from "react"
 export function EditOrder(){
+
+    const [tag,setTag]=useState([])
+    const [newtag,setNewTag]= useState('')
+    const HandleTag=()=>{
+        setTag(prev=>[...prev,newtag])
+        setNewTag('')
+    }
     return(
         <EditWrapper>
              <Header/>
@@ -27,16 +35,29 @@ export function EditOrder(){
                                        </label>
                                    </Upload>
                                 </div>
-                                <Input title='Nome' placeholder='Ex.:Salada Caesar'/>
+                                <Input title='Nome' placeholder='Ex.:Salada Caesar' />
                             </ImageArea>
                     
                            <Ingredients_Price>
                                 <InfoArea>
                                     <p>Ingredientes</p>
                                     <InputSection>
-                                        <TagItem isNew placeholder='adicionar'/>
-                                        <TagItem/>
-                                        <TagItem/>
+                                        
+                                        <TagItem 
+                                        isNew 
+                                        placeholder='adicionar'
+                                        onChange={e=>setNewTag(e.target.value)}
+                                        value={newtag}
+                                        onClick={HandleTag}
+                                        />
+                                        
+                                        {
+                                           tag.map((item,id)=>(
+                                            <TagItem
+                                            key={id}
+                                            value={item}/>
+                                           ))
+                                        }
                                     </InputSection>
                                 </InfoArea>
                                 <div>
@@ -46,7 +67,7 @@ export function EditOrder(){
                       
                            <InfoArea>
                                 <p>Descrição</p>
-                                <Description/>
+                                <Description />
                             </InfoArea>
                         </Form>
                         <Button >

@@ -1,5 +1,6 @@
 
 
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const HeaderWrapper= styled.header`
@@ -17,7 +18,19 @@ border: none;
 }
 
 
->div{
+
+>p{
+    font-family: 'Roboto', sans-serif;
+    font-size:16px;
+    line-height: 26px;
+    
+    color:${({theme})=>theme.COLORS.HEADER_GRAY};
+}
+
+
+`
+export const HeaderLogo=styled(Link)`
+
     display: flex;
     align-items: center;
     gap:11px;
@@ -33,19 +46,9 @@ border: none;
     >img{
         width: 30px;
     }
-}
->p{
-    font-family: 'Roboto', sans-serif;
-    font-size:16px;
-    line-height: 26px;
-    
-    color:${({theme})=>theme.COLORS.HEADER_GRAY};
-}
-
 
 `
-
-export const ButtonHeader= styled.button`
+export const ButtonHeader= styled(Link)`
 width: 216px;
 height: 56px;
 display: flex;

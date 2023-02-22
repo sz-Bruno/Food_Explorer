@@ -7,11 +7,12 @@ height: 100vh;
 display: grid;
 grid-template-areas: "header" "content" "footer" ;
 grid-template-rows: 104px auto 77px; 
-
+overflow-x: hidden;
 `
 
 export const Content= styled.div`
 width: 100%;
+
 grid-area: content;
 padding: 0px 116px;
 margin-bottom: 194px;

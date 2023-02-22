@@ -7,15 +7,20 @@ import {PaymentArea} from "./pages/PaymentArea"
 import {OrderStatus} from "./pages/OrderStatus"
 import { EditOrder } from './pages/EditOrder'
 import { DishDetails } from './pages/DishDetails'
+import { Routes } from './Routes'
 import GloalStyle from "./styles/global"
 import { ThemeProvider } from 'styled-components'
 import theme from './styles/theme'
-
+import { AuthProvider } from './hooks/Auth'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GloalStyle/>
-      <PaymentArea/>
+    <AuthProvider>
+    <Routes/>
+    </AuthProvider>
+      
+      
     </ThemeProvider>
     
   </React.StrictMode>,

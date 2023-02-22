@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const SignInWrapper= styled.div`
 
@@ -60,4 +61,13 @@ margin-left:153px;
 
 
 
+`
+export const ButtonText= styled(Link)`
+background: transparent;
+border:none;
+color:${({theme})=>theme.COLORS.WHITE};
+font-family: 'Poppins', sans-serif;
+font-size: 14px;
+line-height: 24px;
+margin-top: 32px;
 `

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { Link } from "react-router-dom";
 export const DishWrapper= styled.div`
 width: 300px;
 height: 512px;
@@ -49,7 +49,7 @@ font-weight: 400;
 
 
 `
-export const DishDetails= styled.button`
+export const DishDetails= styled(Link)`
 
 
   background:none;

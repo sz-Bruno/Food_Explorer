@@ -1,4 +1,4 @@
-import{HeaderWrapper,ButtonHeader} from "./style"
+import{HeaderWrapper,ButtonHeader,HeaderLogo} from "./style"
 import logo from "../../assets/images/explorer_logo.svg"
 import buttonHeader from "../../assets/images/button_header.svg"
 import signOutButton from "../../assets/images/sign_out.svg"
@@ -14,13 +14,13 @@ export function Header({onClick,...rest}){
  
     return(
         <HeaderWrapper{...rest}>
-          <div>
+          <HeaderLogo to='/'>
             <img src={logo} alt="Logo do Explorer" />
             <h1>food explorer</h1>
-          </div>
+          </HeaderLogo>
           <p>Meus Favoritos  </p>
           <InputHeader onChange={(e)=>console.log(e.target.value)} icon={FiSearch} placeholder="Busque pelas opções de pratos"/>
-          <ButtonHeader onClick={onClick} >
+          <ButtonHeader to='/payment' onClick={onClick} >
             <img src={buttonHeader} alt="logo do botão Meu Pedido" />
             <p>Meu pedido (0) </p>
           </ButtonHeader>

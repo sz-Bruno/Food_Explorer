@@ -10,6 +10,7 @@ background-color: ${({theme})=>theme.COLORS.HEADER_INPUT};
 padding:16px 14px;
 border-radius: 5px;
 margin-right: 32px;
+gap:8px;
 >input{
     width: 100%;
     outline: none;

@@ -10,10 +10,7 @@ export function Dish({image, name, description,price,...rest}){
 
     const [count,setcount]= useState(0)
     
-    const HandleCardClicked=()=>{
-        alert('muda pra página de detalhes do prato')
-        
-    }
+  
 
     const HandleAdd=()=>{
         setcount(count+1)
@@ -29,9 +26,9 @@ export function Dish({image, name, description,price,...rest}){
         alert(`${name} incluído no carrinho `)
     }
     return(
-        <DishWrapper onClick={HandleCardClicked}{...rest}>
+        <DishWrapper  {...rest}>
          <img src={image} alt="Foto do prato" />
-         <DishDetails><h1>{name} &gt;</h1></DishDetails>
+         <DishDetails to='/details'><h1>{name} &gt;</h1></DishDetails>
          <p>{description}</p>
          <h2>{price}</h2>
            <AddArea>

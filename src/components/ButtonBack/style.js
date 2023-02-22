@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 
 
-export const BackWrapper= styled.button`
+export const BackWrapper= styled(Link)`
 
 grid-area: content;
 width: 100px;
