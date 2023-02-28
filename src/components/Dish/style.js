@@ -12,6 +12,12 @@ display: block;
 margin-right: 27px;
 margin-bottom: 8px;
 
+:hover{
+  transform: scale(1.2);
+  transition: all 1s;
+  filter: brightness(1.5);
+  background-color:#1b1b1b;
+}
 
 
 
@@ -55,6 +61,7 @@ export const DishDetails= styled(Link)`
   background:none;
   border: none;
   margin: 0 auto;
+  
 
   >h1{
 font-size: 24px;

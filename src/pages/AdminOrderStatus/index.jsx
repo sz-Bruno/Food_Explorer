@@ -7,8 +7,9 @@ import { Table } from "../../components/Table"
 
 
 
-export function OrderStatus(){
-
+export function AdminOrderStatus(){
+  
+   
   
     const [Order, setOrder]= useState([{
         status: 'Pendente',
@@ -33,19 +34,35 @@ export function OrderStatus(){
            <Section title='Pedidos'>
                   
                  <Table>
-                 { 
-                
-                  Order.map((item,id)=>
                  
-                      <tr key={id}>
-                         <td >{item.status}</td>
-                         <td>{item.code}</td>
-                         <td>{item.description}</td>
-                         <td>{item.time}</td>
-                     </tr>
-                 )
-                  }
-                  
+                  { 
+                
+                Order.map((item,id)=>
+               
+                    <tr key={id} >
+                       <td >
+                        <select
+                          onChange={(e)=>{
+                          Order[id].status=e.target.value
+                               
+                            
+                                console.log(Order)     
+                    }}  
+                            name="status_option" id="status_option">
+
+                            <option value="Pendente"> Pendente</option>
+                            <option value="Preparando">Preparando</option>
+                            <option value="Entregue">Entregue</option>
+
+                          
+                        </select>
+                        </td>
+                       <td>{item.code}</td>
+                       <td>{item.description}</td>
+                       <td>{item.time}</td>
+                   </tr>
+               )
+                }
                  </Table>
                
            </Section>

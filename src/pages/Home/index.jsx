@@ -10,151 +10,158 @@ import { api } from "../../services/api"
 import Candies from "../../assets/images/candies.svg"
 import { useState } from "react"
 import { useEffect } from "react"
-
 import { useAuth } from "../../hooks/Auth"
+import ButtonBack from "../../assets/images/back_button.svg"
+import ButtonGo from "../../assets/images/go_button.svg"
+import { useRef } from "react"
+
 export function Home(){
-   const [data, setData]= useState([])
+   const context= useAuth()
+   
+   console.log('CONTEXTO USADO=>',context)
+   const carousel= useRef(null)
+   const carousel2= useRef(null)
+   const carousel3= useRef(null)
+   const [principals, setPrincipals]= useState([])
+   const [drinks, setDrinks]= useState([])
+   const [desserts, setDesserts]= useState([])
+   const [chose, setChose]=useState([])
    const Url="http://localhost:3000/files/"
+
+   const Handleadd=(name,array)=>{
+      const newchose= array.filter(item=>(name===item.name))
+      setChose(prev=>[...prev,newchose])
+      
+   }
+   const HandleClickLeftPrincipal=(e)=>{
+      e.preventDefault()
+     
+      carousel.current.scrollLeft-= carousel.current.offsetWidth
+   }
+   const HandleClickRightPrincipal=(e)=>{
+      e.preventDefault()
+      
+      carousel.current.scrollLeft+= carousel.current.offsetWidth
+   }
+   const HandleClickLeftDrink=(e)=>{
+      e.preventDefault()
+     
+      carousel2.current.scrollLeft-= carousel.current.offsetWidth
+   }
+   const HandleClickRightDrink=(e)=>{
+      e.preventDefault()
+      
+      carousel2.current.scrollLeft+= carousel.current.offsetWidth
+   }
+   const HandleClickLeftDessert=(e)=>{
+      e.preventDefault()
+     
+      carousel3.current.scrollLeft-= carousel.current.offsetWidth
+   }
+   const HandleClickRightDessert=(e)=>{
+      e.preventDefault()
+      
+      carousel3.current.scrollLeft+= carousel.current.offsetWidth
+   }
+  console.log(chose)
 
   useEffect(()=>{
    async function LoadDish(){
-      const response= await api.get('/principals')
-      setData(response.data)
+      const ResponsePrincipal= await api.get('/principals')
+      const ResponseDrinks= await api.get('/drinks')
+      const ResponseDessert= await api.get('/desserts')
+      setPrincipals(ResponsePrincipal.data)
+      setDrinks(ResponseDrinks.data)
+      setDesserts(ResponseDessert.data)
       
    }
+   
   
    LoadDish()
   
   },[])
- 
-  const context= useAuth()
-   console.log('CONTEXTO USADO=>',context)
+
   
+
+
+   
      return(
          <TesteWrapper>
               <Header/>
              
              <MainContent>
-                  <img src={Candies} alt="" />
+                  <img src={Candies} alt="Imagem de doces" />
                   <div>
                        <h1>SABORES INIGUALÁVEIS</h1>
                        <p>Sinta o cuidado do preparo com ingredientes selecionados</p>
                   </div>
                     <Section title="Pratos principais">
-                       <Options>
+                       <div className="carousel" ref={carousel}>
+                        <button onClick={HandleClickLeftPrincipal} className="left"><img src={ButtonBack} alt="voltar" /></button>
+                       
+                       
                        {
-                          data.map((dish,id)=>(
+                          principals.map((dish,id)=>(
                            <Dish 
                            key={id}
                            image={ `${Url}${dish.avatar}`}
                            name={dish.name}
                            description={dish.description}
                            price={dish.price}
+                           onClick={()=> Handleadd(dish.name,principals)}
                         />
                           ))
                        }
-                           
+                       
+                            <button onClick={HandleClickRightPrincipal} className="right"><img src={ButtonGo} alt="avançar"/></button>
+                       </div>
 
-                            
-                       </Options>
                     </Section>
 
                     <Section title="Bebidas">
-                       <Options>
-                            <Dish 
-                               image={Ravanello} 
-                               name="Salada Ravanello"
-                               description="Rabanetes, 
-                               folhas verdes e molho agridoce 
-                               salpicados com gergelim"
-                               price="R$ 49,97"
-                            />
-
-                            <Dish 
-                               image={Ravanello} 
-                               name="Salada Ravanello"
-                               description="Rabanetes, 
-                               folhas verdes e molho agridoce            
-                               salpicados com gergelim"
-                               price="R$ 49,97"
-                            />
-
-                            <Dish 
-                               image={Ravanello} 
-                               name="Salada Ravanello"
-                               description="Rabanetes, 
-                               folhas verdes e molho agridoce 
-                               salpicados com gergelim"
-                               price="R$ 49,97"
-                            />
-
-                            <Dish 
-                               image={Ravanello} 
-                               name="Salada Ravanello"
-                               description="Rabanetes, 
-                               folhas verdes e molho agridoce 
-                               salpicados com gergelim"
-                               price="R$ 49,97"
-                            />
-
-                            <Dish 
-                               image={Ravanello} 
-                               name="Salada Ravanello"
-                               description="Rabanetes, 
-                               folhas verdes e molho agridoce 
-                               salpicados com gergelim"
-                               price="R$ 49,97"
-                             />
-                       </Options>
+                    <div className="carousel" ref={carousel2}>
+                        <button onClick={HandleClickLeftDrink} className="left"><img src={ButtonBack} alt="voltar" /></button>
+                       
+                       
+                        {
+                          drinks.map((dish,id)=>(
+                           <Dish 
+                           key={id}
+                           image={ `${Url}${dish.avatar}`}
+                           name={dish.name}
+                           description={dish.description}
+                           price={dish.price}
+                           onClick={()=> Handleadd(dish.name,drinks)}
+                        />
+                          ))
+                       }
+                       
+                            <button onClick={HandleClickRightDrink} className="right"><img src={ButtonGo} alt="avançar"/></button>
+                       </div>
+                       
                     </Section>
 
                     <Section title="Sobremesas">
-                       <Options>
-                            <Dish 
-                               image={Ravanello} 
-                               name="Salada Ravanello"
-                               description="Rabanetes, 
-                               folhas verdes e molho agridoce 
-                               salpicados com gergelim"
-                               price="R$ 49,97"
-                            />
-
-                            <Dish 
-                               image={Ravanello} 
-                               name="Salada Ravanello"
-                               description="Rabanetes, 
-                               folhas verdes e molho agridoce            
-                               salpicados com gergelim"
-                               price="R$ 49,97"
-                            />
-
-                            <Dish 
-                               image={Ravanello} 
-                               name="Salada Ravanello"
-                               description="Rabanetes, 
-                               folhas verdes e molho agridoce 
-                               salpicados com gergelim"
-                               price="R$ 49,97"
-                            />
-
-                            <Dish 
-                               image={Ravanello} 
-                               name="Salada Ravanello"
-                               description="Rabanetes, 
-                               folhas verdes e molho agridoce 
-                               salpicados com gergelim"
-                               price="R$ 49,97"
-                            />
-
-                            <Dish 
-                               image={Ravanello} 
-                               name="Salada Ravanello"
-                               description="Rabanetes, 
-                               folhas verdes e molho agridoce 
-                               salpicados com gergelim"
-                               price="R$ 49,97"
-                             />
-                       </Options>
+                    <div className="carousel" ref={carousel3}>
+                        <button onClick={HandleClickLeftDessert} className="left"><img src={ButtonBack} alt="voltar" /></button>
+                       
+                       
+                        {
+                          desserts.map((dish,id)=>(
+                           <Dish 
+                           key={id}
+                           image={ `${Url}${dish.avatar}`}
+                           name={dish.name}
+                           description={dish.description}
+                           price={dish.price}
+                           onClick={()=> Handleadd(dish.name,desserts)}
+                        />
+                          ))
+                       }
+                       
+                            <button onClick={HandleClickRightDessert} className="right"><img src={ButtonGo} alt="avançar"/></button>
+                       </div>
+                       
                     </Section>
                 </MainContent>
               <Footer/>

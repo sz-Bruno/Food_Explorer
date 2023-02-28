@@ -6,7 +6,7 @@ import { useState } from "react"
 
 
 
-export function Dish({image, name, description,price,...rest}){
+export function Dish({image, name, description,price,onClick,...rest}){
 
     const [count,setcount]= useState(0)
     
@@ -23,12 +23,15 @@ export function Dish({image, name, description,price,...rest}){
         }
     }
     const HandleInclude=()=>{
-        alert(`${name} incluído no carrinho `)
+        alert(`${count}X ${name} incluído no carrinho `)
     }
+   const Handleshow=()=>{
+    console.log(name,description,price)
+   }
     return(
         <DishWrapper  {...rest}>
          <img src={image} alt="Foto do prato" />
-         <DishDetails to='/details'><h1>{name} &gt;</h1></DishDetails>
+         <DishDetails onClick={Handleshow} to='/details'><h1>{name} &gt;</h1></DishDetails>
          <p>{description}</p>
          <h2>{price}</h2>
            <AddArea>
