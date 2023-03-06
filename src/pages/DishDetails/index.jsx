@@ -10,9 +10,12 @@ import Less from "../../assets/images/lessIcon.svg"
 import Plus from "../../assets/images/plusIcon.svg"
 import { ButtonInclude } from "../../components/ButtonInclude"
 import { useState } from "react"
-
+import { useContext } from "react"
+import {AuthContext} from "../.././hooks/Auth"
 
 export function DishDetails(){
+
+    const {dish,HandleAddDishs,setSelectedDishs} = useContext(AuthContext)
     const [count, setcount]= useState(0)
     
     const HandleAdd=()=>{
@@ -24,33 +27,10 @@ export function DishDetails(){
             setcount(0)
         }
     }
-    const HandleInclude=()=>{
-        alert(`${Dish.name} incluído no carrinho `)
-    }
-    const Dish=
-        {
-            name:'Salada Ravanello',
-            image: Ravanello,
-            description:'Rabanetes, folhas verdes e molho agridoce salpicados com gergelim.',
-            price:'25,98',
-            ingredients: [
-                {
-                    name:'Alface',
-                    image:Alface
-                },
-                {
-                    name:'Alface',
-                    image:Alface
-                },
-                {
-                    name:'Alface',
-                    image:Alface
-                },
-                
-            ]
-        }
+    
+    
          const HandleCart=()=>{
-            console.log(Dish)
+            console.log(dish)
          }
     return(
         <DetailsWrapper>
@@ -58,28 +38,23 @@ export function DishDetails(){
             <Content>
                 <Buttonback />
                 <div>
-                   <img src={Ravanello} alt="Imagem da salada ravanello" />
+                   <img src={dish.image} alt={dish.name} />
                   <Description>
-                     <h1>{Dish.name}</h1>
-                     <h2>{Dish.description}</h2>
-                     <Ingredients_List>
-                         {Dish.ingredients.map((item,id)=>
-                            <Ingredients key={id}  ingredient={item.name} image={item.image}/>
-                         )}
-                     </Ingredients_List>
-
+                     <h1>{dish.name}</h1>
+                     <h2>{dish.description}</h2>
+                     
                      <Add_Price_Area>
-                      <h2>R$ {Dish.price}</h2>
+                      <h2>R$ {dish.price}</h2>
                       <div>
                         <button onClick={HandleRemove}>
                             <img src={Less}/>
                         </button>
-                        <h3>{count<10? `0${count}`: count}</h3>
+                        <h3>{dish.qtd<10? `0${dish.qtd}`: dish.qtd}</h3>
                         <button onClick={HandleAdd}>
                             <img src={Plus}/>
                         </button>
                       </div>
-                      <ButtonInclude onClick={HandleInclude}title='incluir'/>
+                      <ButtonInclude onClick={()=>setSelectedDishs(prev=>[...prev,dish])}title='incluir'/>
                      </Add_Price_Area>
                   </Description>
                   

@@ -16,8 +16,14 @@ import Ravanello from "../../assets/images/ravanello.png"
 import Pix from "../../assets/images/pix_image.svg"
 import Credit from "../../assets/images/credit_card.svg"
 import { useState,useEffect } from "react"
+import { useContext } from "react"
+import { AuthContext } from "../../hooks/Auth"
 
+
+
+    
 export function PaymentArea(){
+ const {selectedDishs,HandleDeleteDishs,count}= useContext(AuthContext)
 
   const [isPixVisible, setisPixVisible]= useState(false)
   const [isCardVisible, setisCardVisible]= useState(true)
@@ -29,38 +35,7 @@ export function PaymentArea(){
   const [isButtonPixActived,setisButtonPixActived]= useState(true)
   const [isButtonCardActived,setisButtonCardActived]= useState(false)
   const [total_price, settotal_price]= useState()
-  const [Dish,setDish]= useState([
-    {
-    name:"Salada Ravanello",
-    image:Ravanello,
-    qtd:"1",
-    price: 42.44
-  },
-  {
-    name:"Selada Ravanello",
-    image:Ravanello,
-    qtd:"1",
-    price: 49.97
-  },
-  {
-    name:"Silada Ravanello",
-    image:Ravanello,
-    qtd:"1",
-    price:  70.84
-  },
-  {
-    name:"Solada Ravanello",
-    image:Ravanello,
-    qtd:"1",
-    price:  50.43
-  },
-  {
-    name:"Sulada Ravanello",
-    image:Ravanello,
-    qtd:"1",
-    price:  50.43
-  },
-  ])
+  
   
   function HandleCardOption(){
     setisPixVisible(false)
@@ -124,19 +99,14 @@ export function PaymentArea(){
    
     }
 
-    const prices= Dish.map(item=>item.price)
+    const prices= selectedDishs.map(item=>item.qtd===1?item.price: item.price*item.qtd)
     
    useEffect(()=>{
 
       HandlePrice(prices)
     },[prices])
      
-    const HandleRemove=(name)=>{
-
-      const newDish=Dish.filter(item=>item.name!==name)
-      setDish(newDish)
-       
-      }
+    
      
     
     
@@ -146,14 +116,15 @@ export function PaymentArea(){
             <Payment >
                 <Section title="Meu pedido"  total={total_price}   >
 
-                  {Dish.map((item,id)=>
+                  {selectedDishs.map((item,id)=>
                   <Description
-                    onClick={()=>HandleRemove(item.name)}
-                   key={id}
+                  key={id}
+                  onClick={()=>HandleDeleteDishs(item.id)}
+                   
                   image={item.image}
                   qtd={item.qtd}
                   name={item.name}
-                  price={item.price}
+                  price={(item.price)*item.qtd}
                   />
                   )}
                     

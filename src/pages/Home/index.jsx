@@ -10,26 +10,27 @@ import { api } from "../../services/api"
 import Candies from "../../assets/images/candies.svg"
 import { useState } from "react"
 import { useEffect } from "react"
-import { useAuth } from "../../hooks/Auth"
+import { useContext } from "react"
+import { AuthContext } from "../../hooks/Auth"
 import ButtonBack from "../../assets/images/back_button.svg"
 import ButtonGo from "../../assets/images/go_button.svg"
 import { useRef } from "react"
 
 export function Home(){
-   const context= useAuth()
+  const {count,HandleClickAddQtd}= useContext(AuthContext)
    
-   console.log('CONTEXTO USADO=>',context)
+  
    const carousel= useRef(null)
    const carousel2= useRef(null)
    const carousel3= useRef(null)
    const [principals, setPrincipals]= useState([])
    const [drinks, setDrinks]= useState([])
    const [desserts, setDesserts]= useState([])
-   const [chose, setChose]=useState([])
+   
    const Url="http://localhost:3000/files/"
 
-   const Handleadd=(name,array)=>{
-      const newchose= array.filter(item=>(name===item.name))
+   const Handleadd=(id,array)=>{
+      const newchose= array.find(item=>(id===item.id))
       setChose(prev=>[...prev,newchose])
       
    }
@@ -63,7 +64,7 @@ export function Home(){
       
       carousel3.current.scrollLeft+= carousel.current.offsetWidth
    }
-  console.log(chose)
+  
 
   useEffect(()=>{
    async function LoadDish(){
@@ -104,11 +105,13 @@ export function Home(){
                           principals.map((dish,id)=>(
                            <Dish 
                            key={id}
-                           image={ `${Url}${dish.avatar}`}
+                           image={`${Url}${dish.avatar}` }
                            name={dish.name}
                            description={dish.description}
                            price={dish.price}
-                           onClick={()=> Handleadd(dish.name,principals)}
+                           qtd={count}
+                           onClicked={()=>HandleClickAddQtd(id,dish.name,dish.price,`${Url}${dish.avatar}`)}
+                           
                         />
                           ))
                        }
