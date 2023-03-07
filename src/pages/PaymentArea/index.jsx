@@ -119,7 +119,7 @@ export function PaymentArea(){
                   {selectedDishs.map((item,id)=>
                   <Description
                   key={id}
-                  onClick={()=>HandleDeleteDishs(item.id)}
+                  onClick={()=>HandleDeleteDishs(item.name)}
                    
                   image={item.image}
                   qtd={item.qtd}

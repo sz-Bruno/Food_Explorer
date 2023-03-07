@@ -1,10 +1,12 @@
 
-import {TesteWrapper,MainContent} from "./style"
+import {TesteWrapper,MainContent,DishDetails} from "./style"
 import { Header } from "../../components/Header"
 import { Footer } from "../../components/Footer"
 import { Section } from "../../components/Section"
 import { Options } from "../../components/Options"
 import { Dish } from "../../components/Dish"
+import Less from "../../assets/images/lessIcon.svg"
+import Plus from "../../assets/images/plusIcon.svg"
 import Ravanello from "../../assets/images/ravanello.png"
 import { api } from "../../services/api"
 import Candies from "../../assets/images/candies.svg"
@@ -15,9 +17,10 @@ import { AuthContext } from "../../hooks/Auth"
 import ButtonBack from "../../assets/images/back_button.svg"
 import ButtonGo from "../../assets/images/go_button.svg"
 import { useRef } from "react"
+import { ButtonInclude } from "../../components/ButtonInclude"
 
 export function Home(){
-  const {count,HandleClickAddQtd}= useContext(AuthContext)
+  const {count,HandleClickAddQtd,HandleAddDishs,HandleDetails,HandleReduce}= useContext(AuthContext)
    
   
    const carousel= useRef(null)
@@ -103,16 +106,25 @@ export function Home(){
                        
                        {
                           principals.map((dish,id)=>(
-                           <Dish 
-                           key={id}
-                           image={`${Url}${dish.avatar}` }
-                           name={dish.name}
-                           description={dish.description}
-                           price={dish.price}
-                           qtd={count}
-                           onClicked={()=>HandleClickAddQtd(id,dish.name,dish.price,`${Url}${dish.avatar}`)}
                            
-                        />
+                           <div className="Dish_Wrapper" key={id}>
+                              
+                              <img src={`${Url}${dish.avatar}`} alt="Foto do prato" />
+                              <DishDetails onClick={()=>HandleDetails(id,dish.name,dish.description,`${Url}${dish.avatar}`,dish.price)} to ='/details'>
+                               <h1>{dish.name}&gt;</h1>
+                              </DishDetails>
+                              <p>{dish.description}</p>
+                              <h2>R$ {dish.price}</h2>
+                               <div className="Add_Area">
+                                 <div>
+                                    <button onClick={()=>HandleReduce(dish.name,count)}><img src={Less}  /></button>
+                                    <h3>{count>9?count:`0${count}`}</h3>
+                                    <button onClick={()=>HandleClickAddQtd(id,dish.name,dish.price,`${Url}${dish.avatar}`)}><img src={Plus}  /></button>
+                                 </div>
+                                 <ButtonInclude onClick={()=>HandleAddDishs(dish.name,count)} title='incluir'/>
+                               </div>
+
+                           </div>
                           ))
                        }
                        
@@ -128,14 +140,25 @@ export function Home(){
                        
                         {
                           drinks.map((dish,id)=>(
-                           <Dish 
-                           key={id}
-                           image={ `${Url}${dish.avatar}`}
-                           name={dish.name}
-                           description={dish.description}
-                           price={dish.price}
-                           onClick={()=> Handleadd(dish.name,drinks)}
-                        />
+                           
+                           <div className="Dish_Wrapper" key={id}>
+                              
+                              <img src={`${Url}${dish.avatar}`} alt="Foto do prato" />
+                              <DishDetails onClick={()=>HandleDetails(id,dish.name,dish.description,`${Url}${dish.avatar}`,dish.price)} to ='/details'>
+                               <h1>{dish.name}&gt;</h1>
+                              </DishDetails>
+                              <p>{dish.description}</p>
+                              <h2>R$ {dish.price}</h2>
+                               <div className="Add_Area">
+                                 <div>
+                                    <button><img src={Less}  /></button>
+                                    <h3>{count>9?count:`0${count}`}</h3>
+                                    <button onClick={()=>HandleClickAddQtd(id,dish.name,dish.price,`${Url}${dish.avatar}`)}><img src={Plus}  /></button>
+                                 </div>
+                                 <ButtonInclude onClick={()=>HandleAddDishs(dish.name,count)} title='incluir'/>
+                               </div>
+
+                           </div>
                           ))
                        }
                        
@@ -149,16 +172,28 @@ export function Home(){
                         <button onClick={HandleClickLeftDessert} className="left"><img src={ButtonBack} alt="voltar" /></button>
                        
                        
-                        {
+                        
+                       {
                           desserts.map((dish,id)=>(
-                           <Dish 
-                           key={id}
-                           image={ `${Url}${dish.avatar}`}
-                           name={dish.name}
-                           description={dish.description}
-                           price={dish.price}
-                           onClick={()=> Handleadd(dish.name,desserts)}
-                        />
+                           
+                           <div className="Dish_Wrapper" key={id}>
+                              
+                              <img src={`${Url}${dish.avatar}`} alt="Foto do prato" />
+                              <DishDetails onClick={()=>HandleDetails(id,dish.name,dish.description,`${Url}${dish.avatar}`,dish.price)} to ='/details'>
+                               <h1>{dish.name}&gt;</h1>
+                              </DishDetails>
+                              <p>{dish.description}</p>
+                              <h2>R$ {dish.price}</h2>
+                               <div className="Add_Area">
+                                 <div>
+                                    <button><img src={Less}  /></button>
+                                    <h3>{count>9?count:`0${count}`}</h3>
+                                    <button onClick={()=>HandleClickAddQtd(id,dish.name,dish.price,`${Url}${dish.avatar}`)}><img src={Plus}  /></button>
+                                 </div>
+                                 <ButtonInclude onClick={()=>HandleAddDishs(dish.name,count)} title='incluir'/>
+                               </div>
+
+                           </div>
                           ))
                        }
                        

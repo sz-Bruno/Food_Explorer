@@ -15,8 +15,8 @@ import {AuthContext} from "../.././hooks/Auth"
 
 export function DishDetails(){
 
-    const {dish,HandleAddDishs,setSelectedDishs} = useContext(AuthContext)
-    const [count, setcount]= useState(0)
+    const {dish,count,setcount,HandleAddDishs,setSelectedDishs,HandleClickAddQtd} = useContext(AuthContext)
+    
     
     const HandleAdd=()=>{
         setcount(count+1)
@@ -33,7 +33,7 @@ export function DishDetails(){
             console.log(dish)
          }
     return(
-        <DetailsWrapper>
+        <DetailsWrapper >
             <Header onClick={HandleCart}/>
             <Content>
                 <Buttonback />
@@ -49,12 +49,12 @@ export function DishDetails(){
                         <button onClick={HandleRemove}>
                             <img src={Less}/>
                         </button>
-                        <h3>{dish.qtd<10? `0${dish.qtd}`: dish.qtd}</h3>
-                        <button onClick={HandleAdd}>
+                        <h3>{count<10? `0${count}`: count}</h3>
+                        <button onClick={()=>HandleClickAddQtd(dish.id,dish.name,dish.price,dish.image)}>
                             <img src={Plus}/>
                         </button>
                       </div>
-                      <ButtonInclude onClick={()=>setSelectedDishs(prev=>[...prev,dish])}title='incluir'/>
+                      <ButtonInclude onClick={()=>HandleAddDishs(dish.name,count)}title='incluir'/>
                      </Add_Price_Area>
                   </Description>
                   

@@ -4,21 +4,23 @@ import { Section } from "../../components/Section"
 import {OrderWrapper,Content} from "./style"
 import { useState } from "react"
 import { Table } from "../../components/Table"
+import { useContext } from "react"
+import { AuthContext } from "../../hooks/Auth"
 
 
 
 export function AdminOrderStatus(){
   
-   
-  
+   const {dish_status,setdish_status}= useContext(AuthContext)
+   console.log(dish_status)
     const [Order, setOrder]= useState([{
-        status: 'Pendente',
+        status: dish_status,
         code:'000000020',
         description:'1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela, 1 x Suco de Maracujá',
         time:'20/05 às 18h00'
     },
     {
-        status:'Pendente', 
+        status:dish_status, 
         code:'000000021',
         description:'3 x Salada Radish, 1 x Chá de Canela, 1 x Suco de Uva',
         time:'20/05 às 18h15'
@@ -43,10 +45,10 @@ export function AdminOrderStatus(){
                        <td >
                         <select
                           onChange={(e)=>{
-                          Order[id].status=e.target.value
+                            setdish_status(e.target.value) 
                                
-                            
-                                console.log(Order)     
+                           
+                                
                     }}  
                             name="status_option" id="status_option">
 
