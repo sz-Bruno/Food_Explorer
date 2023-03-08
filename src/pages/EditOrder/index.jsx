@@ -12,6 +12,9 @@ export function EditOrder(){
 
     const [tag,setTag]=useState([])
     const [newtag,setNewTag]= useState('')
+    const [name,setName]=useState('')
+    const [price,setPrice]=useState('')
+    const [avatar,setAvatar]=useState('')
     const HandleTag=()=>{
         setTag(prev=>[...prev,newtag])
         setNewTag('')
@@ -30,12 +33,12 @@ export function EditOrder(){
                                    <Upload>
                                        <label htmlFor="upload">
                                              <FiUpload/>
-                                          <input type="file" name="" id="upload" />
+                                          <input type="file" name="" id="upload" onChange={(e)=>setAvatar(e.target.value)}/>
                                              Selecione imagem
                                        </label>
                                    </Upload>
                                 </div>
-                                <Input title='Nome' placeholder='Ex.:Salada Caesar' />
+                                <Input title='Nome' placeholder='Ex.:Salada Caesar' onChange={(e)=>setName(e.target.value)}/>
                             </ImageArea>
                     
                            <Ingredients_Price>
@@ -61,7 +64,7 @@ export function EditOrder(){
                                     </InputSection>
                                 </InfoArea>
                                 <div>
-                                <Input title='preço'/>
+                                <Input title='preço' onChange={e=>setPrice(e.target.value)}/>
                                 </div>
                           </Ingredients_Price>
                       
@@ -70,7 +73,7 @@ export function EditOrder(){
                                 <Description />
                             </InfoArea>
                         </Form>
-                        <Button >
+                        <Button onClick={()=>console.log(name,price,avatar)} >
                             <h1>Adicionar pedido</h1>
                         </Button>
                    </Section>

@@ -21,7 +21,7 @@ import { ButtonInclude } from "../../components/ButtonInclude"
 
 export function Home(){
   const {count,HandleClickAddQtd,HandleAddDishs,HandleDetails,HandleReduce}= useContext(AuthContext)
-   
+  
   
    const carousel= useRef(null)
    const carousel2= useRef(null)
@@ -32,11 +32,8 @@ export function Home(){
    
    const Url="http://localhost:3000/files/"
 
-   const Handleadd=(id,array)=>{
-      const newchose= array.find(item=>(id===item.id))
-      setChose(prev=>[...prev,newchose])
-      
-   }
+  
+   
    const HandleClickLeftPrincipal=(e)=>{
       e.preventDefault()
      
@@ -151,7 +148,7 @@ export function Home(){
                               <h2>R$ {dish.price}</h2>
                                <div className="Add_Area">
                                  <div>
-                                    <button><img src={Less}  /></button>
+                                    <button onClick={()=>HandleReduce(dish.name,count)}><img src={Less}  /></button>
                                     <h3>{count>9?count:`0${count}`}</h3>
                                     <button onClick={()=>HandleClickAddQtd(id,dish.name,dish.price,`${Url}${dish.avatar}`)}><img src={Plus}  /></button>
                                  </div>
@@ -186,7 +183,7 @@ export function Home(){
                               <h2>R$ {dish.price}</h2>
                                <div className="Add_Area">
                                  <div>
-                                    <button><img src={Less}  /></button>
+                                    <button onClick={()=>HandleReduce(dish.name,count)}><img src={Less}  /></button>
                                     <h3>{count>9?count:`0${count}`}</h3>
                                     <button onClick={()=>HandleClickAddQtd(id,dish.name,dish.price,`${Url}${dish.avatar}`)}><img src={Plus}  /></button>
                                  </div>
