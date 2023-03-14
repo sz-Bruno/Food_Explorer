@@ -23,7 +23,7 @@ import { AuthContext } from "../../hooks/Auth"
 
     
 export function PaymentArea(){
- const {selectedDishs,HandleDeleteDishs,count}= useContext(AuthContext)
+ const {selectedDishs,HandleDeleteDishs}= useContext(AuthContext)
 
   const [isPixVisible, setisPixVisible]= useState(false)
   const [isCardVisible, setisCardVisible]= useState(true)
@@ -124,7 +124,7 @@ export function PaymentArea(){
                   image={item.image}
                   qtd={item.qtd}
                   name={item.name}
-                  price={(item.price)*item.qtd}
+                  price={((item.price)*item.qtd).toFixed(2)}
                   />
                   )}
                     

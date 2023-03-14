@@ -100,6 +100,14 @@ margin-bottom: 98px;
   
 }
 }
+.add_dish{
+    margin-bottom: 50px;
+    padding:15px;
+    height: 90px;
+    border-radius: 50%;
+    border:5px solid blue;
+    background:none;
+}
 .Dish_Wrapper{
 width: 300px;
 height: 512px;

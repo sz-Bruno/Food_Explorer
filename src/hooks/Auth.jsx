@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createContext  } from "react";
+import { api } from "../services/api";
 
 
 
@@ -10,26 +11,36 @@ function AuthProvider({children}){
     const [selectedDishs,setSelectedDishs]=useState([])
     const [count,setcount]=useState(0)
     
-   
+   async function updateDish({dish_created,id,avatar}){
+    const fileuploadform= new FormData()
+    fileuploadform.append('avatar',avatar)
 
-    function HandleDetails(id,name,description,image,price){
+    const response= await api.patch(`/principals/${id}`,fileuploadform)
+    dish_created.avatar= response.data.avatar
+    console.log(response)
+   }
+
+    function HandleDetails(id,name,description,image,price,qtd){
         const newdish={
             id:id,
             name:name,
             description:description,
             image:image,
             price:price,
-            qtd:count
+            qtd:qtd
             
         }
-        setDish(newdish)
+        setDish([newdish])
         
         
     }
 
+    function HandleClickAddDetails(id,name,price,image,qtd,array){
+       const product= array.find(item=>item.name===name)
+      setcount(count+1)
+       product.qtd= product.qtd+1
+       
         
-    function HandleClickAddQtd(id,name,price,image){
-        setcount(count+1)
         const item= selectedDishs.find(product=>product.name===name)
        
          if(!item){
@@ -38,7 +49,33 @@ function AuthProvider({children}){
                 name:name,
                 price:price,
                 image:image,
-                qtd:1,
+                qtd:qtd+1,
+              
+            })
+            
+         }else{
+            item.qtd=item.qtd+1
+         }
+
+         setSelectedDishs(selectedDishs)
+         
+       
+    }    
+    function HandleClickAddQtd(id,name,price,image,qtd,array){
+        
+        const card= array.find(item=>item.name===name)
+        setcount(count+1)
+        card.qtd=card.qtd+1
+        
+        const item= selectedDishs.find(product=>product.name===name)
+       
+         if(!item){
+            selectedDishs.push({
+                id:id,
+                name:name,
+                price:price,
+                image:image,
+                qtd:qtd+1,
               
             })
             
@@ -51,29 +88,37 @@ function AuthProvider({children}){
        
     }
     
-    function HandleReduce(name,qtd){
-        
-        setcount(count-1)
-        if(count<1){
-            setcount(0)
+    function HandleReduce(name,qtd,array){
+       
+        const card= array.find(item=>item.name===name)
+            setcount(count-1)
+            card.qtd=card.qtd-1
+
+        if(card.qtd<1){
+           setcount(0)
+             card.qtd=0
         }
         const item= selectedDishs.find(product=>product.name===name)
-        if(!item){
-            alert('Selecione uma quantidade do produto')
-            return
-        }
-        if(item.qtd>1){
+            
             item.qtd=item.qtd-1
             
-        }else{
-            const newselected= selectedDishs.filter((item=>item.name!==name))
+        
+        if(item.qtd<1){
+            
+           
+            const newselected= selectedDishs.filter(item=>item.name!==name)
             setSelectedDishs(newselected)
+        }
+        
+        
+        
+            
             
          
         }
       
         
-    }
+    
     console.log(selectedDishs)
 
     function HandleAddDishs(name,qtd){
@@ -94,7 +139,7 @@ function AuthProvider({children}){
     }
     
     return(
-        <AuthContext.Provider value={{dish,count,setcount,selectedDishs,setSelectedDishs,setDish,HandleDetails,HandleAddDishs,HandleDeleteDishs,HandleClickAddQtd,HandleReduce}}>
+        <AuthContext.Provider value={{dish,count,setcount,selectedDishs,setSelectedDishs,setDish,HandleDetails,HandleAddDishs,HandleDeleteDishs,HandleClickAddQtd,HandleReduce,HandleClickAddDetails,updateDish}}>
             {children}
         </AuthContext.Provider>
     )

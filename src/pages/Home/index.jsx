@@ -31,8 +31,6 @@ export function Home(){
    const [desserts, setDesserts]= useState([])
    
    const Url="http://localhost:3000/files/"
-
-  
    
    const HandleClickLeftPrincipal=(e)=>{
       e.preventDefault()
@@ -97,6 +95,8 @@ export function Home(){
                        <p>Sinta o cuidado do preparo com ingredientes selecionados</p>
                   </div>
                     <Section title="Pratos principais">
+                    <button className="add_dish">Criar prato</button >
+
                        <div className="carousel" ref={carousel}>
                         <button onClick={HandleClickLeftPrincipal} className="left"><img src={ButtonBack} alt="voltar" /></button>
                        
@@ -107,24 +107,24 @@ export function Home(){
                            <div className="Dish_Wrapper" key={id}>
                               
                               <img src={`${Url}${dish.avatar}`} alt="Foto do prato" />
-                              <DishDetails onClick={()=>HandleDetails(id,dish.name,dish.description,`${Url}${dish.avatar}`,dish.price)} to ='/details'>
+                              <DishDetails onClick={()=>HandleDetails(id,dish.name,dish.description,`${Url}${dish.avatar}`,dish.price,dish.qtd)} to ='/details'>
                                <h1>{dish.name}&gt;</h1>
                               </DishDetails>
                               <p>{dish.description}</p>
                               <h2>R$ {dish.price}</h2>
                                <div className="Add_Area">
                                  <div>
-                                    <button onClick={()=>HandleReduce(dish.name,count)}><img src={Less}  /></button>
-                                    <h3>{count>9?count:`0${count}`}</h3>
-                                    <button onClick={()=>HandleClickAddQtd(id,dish.name,dish.price,`${Url}${dish.avatar}`)}><img src={Plus}  /></button>
+                                    <button onClick={()=>HandleReduce(dish.name,dish.qtd,principals)}><img src={Less}  /></button>
+                                    <h3 >{dish.qtd>9?dish.qtd:`0${dish.qtd}`}</h3>
+                                    <button onClick={()=>HandleClickAddQtd(id,dish.name,dish.price,`${Url}${dish.avatar}`,dish.qtd,principals)}><img src={Plus}  /></button>
                                  </div>
-                                 <ButtonInclude onClick={()=>HandleAddDishs(dish.name,count)} title='incluir'/>
+                                 <ButtonInclude onClick={()=>HandleAddDishs(dish.name,dish.qtd)} title='incluir'/>
                                </div>
-
+                                    
                            </div>
                           ))
                        }
-                       
+                      
                             <button onClick={HandleClickRightPrincipal} className="right"><img src={ButtonGo} alt="avançar"/></button>
                        </div>
 
@@ -141,18 +141,18 @@ export function Home(){
                            <div className="Dish_Wrapper" key={id}>
                               
                               <img src={`${Url}${dish.avatar}`} alt="Foto do prato" />
-                              <DishDetails onClick={()=>HandleDetails(id,dish.name,dish.description,`${Url}${dish.avatar}`,dish.price)} to ='/details'>
+                              <DishDetails onClick={()=>HandleDetails(id,dish.name,dish.description,`${Url}${dish.avatar}`,dish.price,dish.qtd)} to ='/details'>
                                <h1>{dish.name}&gt;</h1>
                               </DishDetails>
                               <p>{dish.description}</p>
                               <h2>R$ {dish.price}</h2>
                                <div className="Add_Area">
                                  <div>
-                                    <button onClick={()=>HandleReduce(dish.name,count)}><img src={Less}  /></button>
-                                    <h3>{count>9?count:`0${count}`}</h3>
-                                    <button onClick={()=>HandleClickAddQtd(id,dish.name,dish.price,`${Url}${dish.avatar}`)}><img src={Plus}  /></button>
+                                    <button onClick={()=>HandleReduce(dish.name,dish.qtd,drinks)}><img src={Less}  /></button>
+                                    <h3>{dish.qtd>9?dish.qtd:`0${dish.qtd}`}</h3>
+                                    <button onClick={()=>HandleClickAddQtd(id,dish.name,dish.price,`${Url}${dish.avatar}`,dish.qtd,drinks)}><img src={Plus}  /></button>
                                  </div>
-                                 <ButtonInclude onClick={()=>HandleAddDishs(dish.name,count)} title='incluir'/>
+                                 <ButtonInclude onClick={()=>HandleAddDishs(dish.name,dish.qtd)} title='incluir'/>
                                </div>
 
                            </div>
@@ -176,18 +176,18 @@ export function Home(){
                            <div className="Dish_Wrapper" key={id}>
                               
                               <img src={`${Url}${dish.avatar}`} alt="Foto do prato" />
-                              <DishDetails onClick={()=>HandleDetails(id,dish.name,dish.description,`${Url}${dish.avatar}`,dish.price)} to ='/details'>
+                              <DishDetails onClick={()=>HandleDetails(id,dish.name,dish.description,`${Url}${dish.avatar}`,dish.price,dish.qtd)} to ='/details'>
                                <h1>{dish.name}&gt;</h1>
                               </DishDetails>
                               <p>{dish.description}</p>
                               <h2>R$ {dish.price}</h2>
                                <div className="Add_Area">
                                  <div>
-                                    <button onClick={()=>HandleReduce(dish.name,count)}><img src={Less}  /></button>
-                                    <h3>{count>9?count:`0${count}`}</h3>
-                                    <button onClick={()=>HandleClickAddQtd(id,dish.name,dish.price,`${Url}${dish.avatar}`)}><img src={Plus}  /></button>
+                                    <button onClick={()=>HandleReduce(dish.name,dish.qtd)}><img src={Less}  /></button>
+                                    <h3>{dish.qtd>9?dish.qtd:`0${dish.qtd}`}</h3>
+                                    <button onClick={()=>HandleClickAddQtd(id,dish.name,dish.price,`${Url}${dish.avatar}`,dish.qtd,desserts)}><img src={Plus}  /></button>
                                  </div>
-                                 <ButtonInclude onClick={()=>HandleAddDishs(dish.name,count)} title='incluir'/>
+                                 <ButtonInclude onClick={()=>HandleAddDishs(dish.name,dish.qtd)} title='incluir'/>
                                </div>
 
                            </div>
