@@ -8,6 +8,32 @@ display: grid;
 grid-template-areas: "header" "content" "footer" ;
 grid-template-rows: 104px auto 77px; 
 overflow-x: hidden;
+
+.option_field{
+display:flex;
+flex-direction: column;
+width: 220px;
+height: 60px;
+margin-top: 32px;
+gap:5px;
+>p{
+    color:${({theme})=>theme.COLORS.GREY_INPUT};
+    font-size: 16px;
+    line-height: 16px;
+    font-family: 'Roboto', sans-serif;
+}
+
+}
+.select_field{
+  padding: 16px 24px 16px 24px;
+  background: none;
+  font-family: 'Roboto', sans-serif;
+  font-size:14px;
+  font-weight: 700;
+  border:1px solid ${({theme})=>theme.COLORS.WHITE};
+  border-radius:5px;
+  height: 48px;
+}
 `
 
 export const Content= styled.div`

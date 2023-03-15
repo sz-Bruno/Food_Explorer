@@ -8,11 +8,15 @@ import { Dish } from "../../components/Dish"
 import Less from "../../assets/images/lessIcon.svg"
 import Plus from "../../assets/images/plusIcon.svg"
 import Ravanello from "../../assets/images/ravanello.png"
+import {FiPlus} from 'react-icons/fi'
+import {FiEdit} from 'react-icons/fi'
+
 import { api } from "../../services/api"
 import Candies from "../../assets/images/candies.svg"
 import { useState } from "react"
 import { useEffect } from "react"
 import { useContext } from "react"
+import {useNavigate} from 'react-router-dom'
 import { AuthContext } from "../../hooks/Auth"
 import ButtonBack from "../../assets/images/back_button.svg"
 import ButtonGo from "../../assets/images/go_button.svg"
@@ -22,7 +26,7 @@ import { ButtonInclude } from "../../components/ButtonInclude"
 export function Home(){
   const {count,HandleClickAddQtd,HandleAddDishs,HandleDetails,HandleReduce}= useContext(AuthContext)
   
-  
+  const navigate= useNavigate()
    const carousel= useRef(null)
    const carousel2= useRef(null)
    const carousel3= useRef(null)
@@ -31,6 +35,9 @@ export function Home(){
    const [desserts, setDesserts]= useState([])
    
    const Url="http://localhost:3000/files/"
+   const HandleCreate=()=>{
+     navigate("/edit")
+   }
    
    const HandleClickLeftPrincipal=(e)=>{
       e.preventDefault()
@@ -93,9 +100,12 @@ export function Home(){
                   <div>
                        <h1>SABORES INIGUALÁVEIS</h1>
                        <p>Sinta o cuidado do preparo com ingredientes selecionados</p>
+                       
                   </div>
+                  <button onClick={HandleCreate} className="add_dish">Criar prato <FiPlus size={20}/></button >
                     <Section title="Pratos principais">
-                    <button className="add_dish">Criar prato</button >
+
+                    
 
                        <div className="carousel" ref={carousel}>
                         <button onClick={HandleClickLeftPrincipal} className="left"><img src={ButtonBack} alt="voltar" /></button>
@@ -105,7 +115,7 @@ export function Home(){
                           principals.map((dish,id)=>(
                            
                            <div className="Dish_Wrapper" key={id}>
-                              
+                              <button onClick={()=>console.log(dish)} className="edit"><FiEdit/></button>
                               <img src={`${Url}${dish.avatar}`} alt="Foto do prato" />
                               <DishDetails onClick={()=>HandleDetails(id,dish.name,dish.description,`${Url}${dish.avatar}`,dish.price,dish.qtd)} to ='/details'>
                                <h1>{dish.name}&gt;</h1>

@@ -31,6 +31,24 @@ grid-area: content;
 position: relative;
 margin-bottom: 98px;
 
+.edit{
+    position: absolute;
+    margin-top: 20px;
+    display: flex;
+    margin-left: 9px;
+    display: flex;
+align-items: center;
+padding:10px 20px;
+background-color: ${({theme})=>theme.COLORS.RED};
+gap:11px;
+color:${({theme})=>theme.COLORS.WHITE};
+border: none;
+border-radius: 5px;
+font-family: 'Poppins', sans-serif;
+font-size: 14px;
+font-weight: 500;
+line-height: 24px;
+}
 .carousel{
     display: flex;
     width: 1120px;
@@ -101,12 +119,18 @@ margin-bottom: 98px;
 }
 }
 .add_dish{
-    margin-bottom: 50px;
-    padding:15px;
-    height: 90px;
-    border-radius: 50%;
-    border:5px solid blue;
-    background:none;
+    display: flex;
+align-items: center;
+padding:12px 24px;
+background-color: ${({theme})=>theme.COLORS.RED};
+gap:11px;
+color:${({theme})=>theme.COLORS.WHITE};
+border: none;
+border-radius: 5px;
+font-family: 'Poppins', sans-serif;
+font-size: 14px;
+font-weight: 500;
+line-height: 24px;
 }
 .Dish_Wrapper{
 width: 300px;
@@ -120,12 +144,9 @@ display: block;
 margin-right: 27px;
 margin-bottom: 8px;
 
-:hover{
-  transform: scale(1.2);
-  transition: all 1s;
-  filter: brightness(1.5);
-  background-color:#1b1b1b;
-}
+
+
+
 
 
 
