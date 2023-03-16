@@ -12,19 +12,26 @@ import { ButtonInclude } from "../../components/ButtonInclude"
 import { useState } from "react"
 import { useContext } from "react"
 import {AuthContext} from "../.././hooks/Auth"
-
+import { useNavigate } from "react-router-dom"
 export function DishDetails(){
-
+     const navigate=useNavigate()
     const {dish,count,setcount,HandleAddDishs,setSelectedDishs,HandleClickAddQtd,HandleClickAddDetails,HandleReduce} = useContext(AuthContext)
     
     console.log(dish)
-  
-    const HandleRemove=()=>{
-        setcount(count-1)
-        if(count<1){
-            setcount(0)
+  const HandleAdd=(name,qtd)=>{
+    
+        
+        if(qtd===0){
+            alert('Selecione a quantidade de itens')
+            return
         }
-    }
+       
+        alert(`${name} incluído no carrinho!`)
+
+        navigate('/')
+    
+  }
+    
     
     
          const HandleCart=()=>{
@@ -54,7 +61,7 @@ export function DishDetails(){
                              <img src={Plus}/>
                          </button>
                        </div>
-                       <ButtonInclude onClick={()=>HandleAddDishs(dish.name,dish.qtd)}title='incluir'/>
+                       <ButtonInclude onClick={()=>HandleAdd(item.name,item.qtd)}title='incluir'/>
                       </Add_Price_Area>
                    </Description>
                    

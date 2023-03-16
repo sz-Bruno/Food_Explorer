@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createContext  } from "react";
+import { useNavigate } from "react-router-dom";
 import { api } from "../services/api";
 
 
@@ -10,7 +11,9 @@ function AuthProvider({children}){
     const [dish,setDish]= useState([])
     const [selectedDishs,setSelectedDishs]=useState([])
     const [count,setcount]=useState(0)
-    
+    const [dish_id,setDish_id]= useState('')
+    const [array_dish, setArray_dish]=useState('')
+   
    async function updateDish({dish_created,id,avatar}){
     const fileuploadform= new FormData()
     fileuploadform.append('avatar',avatar)
@@ -138,8 +141,15 @@ function AuthProvider({children}){
         setSelectedDishs(new_options)
     }
     
+     
+       
+       
+       
+
+    
+    
     return(
-        <AuthContext.Provider value={{dish,count,setcount,selectedDishs,setSelectedDishs,setDish,HandleDetails,HandleAddDishs,HandleDeleteDishs,HandleClickAddQtd,HandleReduce,HandleClickAddDetails,updateDish}}>
+        <AuthContext.Provider value={{dish,count,setcount,dish_id,setDish_id,array_dish, setArray_dish,selectedDishs,setSelectedDishs,setDish,HandleDetails,HandleAddDishs,HandleDeleteDishs,HandleClickAddQtd,HandleReduce,HandleClickAddDetails,updateDish}}>
             {children}
         </AuthContext.Provider>
     )

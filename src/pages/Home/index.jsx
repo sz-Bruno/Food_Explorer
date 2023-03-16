@@ -10,7 +10,7 @@ import Plus from "../../assets/images/plusIcon.svg"
 import Ravanello from "../../assets/images/ravanello.png"
 import {FiPlus} from 'react-icons/fi'
 import {FiEdit} from 'react-icons/fi'
-
+import {FiXSquare} from 'react-icons/fi'
 import { api } from "../../services/api"
 import Candies from "../../assets/images/candies.svg"
 import { useState } from "react"
@@ -24,12 +24,15 @@ import { useRef } from "react"
 import { ButtonInclude } from "../../components/ButtonInclude"
 
 export function Home(){
-  const {count,HandleClickAddQtd,HandleAddDishs,HandleDetails,HandleReduce}= useContext(AuthContext)
-  
+  const {count,HandleClickAddQtd,HandleAddDishs,HandleDetails,HandleReduce,setDish_id,setArray_dish}= useContext(AuthContext)
+  const[isadmin,setIsadmin]=useState(true)
   const navigate= useNavigate()
    const carousel= useRef(null)
    const carousel2= useRef(null)
    const carousel3= useRef(null)
+   const [name,setName]= useState('')
+   const [description,setDescription]= useState('')
+   const [price,setPrice]= useState('')
    const [principals, setPrincipals]= useState([])
    const [drinks, setDrinks]= useState([])
    const [desserts, setDesserts]= useState([])
@@ -71,7 +74,12 @@ export function Home(){
    }
   
 
-  useEffect(()=>{
+   const HandleEditDish=(dish,array)=>{
+      setArray_dish(array)
+      setDish_id(dish)
+      navigate('/edit2')
+
+   }
    async function LoadDish(){
       const ResponsePrincipal= await api.get('/principals')
       const ResponseDrinks= await api.get('/drinks')
@@ -82,7 +90,20 @@ export function Home(){
       
    }
    
-  
+   const HandleDeleteDish=(dish,array)=>{
+      const confirmation= confirm('Deseja excluir o prato do cardápio?')
+      if(confirmation){
+         api.delete(`/${array}/${dish}`)
+         alert('Prato deletado do cardápio')
+         LoadDish()
+      }else{
+         return
+      }
+      
+   }
+
+  useEffect(()=>{
+   
    LoadDish()
   
   },[])
@@ -102,7 +123,8 @@ export function Home(){
                        <p>Sinta o cuidado do preparo com ingredientes selecionados</p>
                        
                   </div>
-                  <button onClick={HandleCreate} className="add_dish">Criar prato <FiPlus size={20}/></button >
+                  {isadmin&&
+                     <button onClick={HandleCreate} className="add_dish">Criar prato <FiPlus size={20}/></button >}
                     <Section title="Pratos principais">
 
                     
@@ -115,7 +137,11 @@ export function Home(){
                           principals.map((dish,id)=>(
                            
                            <div className="Dish_Wrapper" key={id}>
-                              <button onClick={()=>console.log(dish)} className="edit"><FiEdit/></button>
+                              {isadmin&&
+                                  <div className="button_admin">
+                                  <button onClick={()=>HandleEditDish(dish.id,'principals')} className="edit"><FiEdit/></button>
+                                  <button onClick={()=>HandleDeleteDish(dish.id,'principals')} className="delete"><FiXSquare/></button></div>
+                                 }
                               <img src={`${Url}${dish.avatar}`} alt="Foto do prato" />
                               <DishDetails onClick={()=>HandleDetails(id,dish.name,dish.description,`${Url}${dish.avatar}`,dish.price,dish.qtd)} to ='/details'>
                                <h1>{dish.name}&gt;</h1>
@@ -149,7 +175,11 @@ export function Home(){
                           drinks.map((dish,id)=>(
                            
                            <div className="Dish_Wrapper" key={id}>
-                              
+                              {isadmin&&
+                                  <div className="button_admin">
+                                  <button onClick={()=>HandleEditDish(dish.id,'drinks')} className="edit"><FiEdit/></button>
+                                  <button onClick={()=>HandleDeleteDish(dish.id,'drinks')} className="delete"><FiXSquare/></button></div>
+                                 }
                               <img src={`${Url}${dish.avatar}`} alt="Foto do prato" />
                               <DishDetails onClick={()=>HandleDetails(id,dish.name,dish.description,`${Url}${dish.avatar}`,dish.price,dish.qtd)} to ='/details'>
                                <h1>{dish.name}&gt;</h1>
@@ -184,7 +214,11 @@ export function Home(){
                           desserts.map((dish,id)=>(
                            
                            <div className="Dish_Wrapper" key={id}>
-                              
+                              {isadmin&&
+                                  <div className="button_admin">
+                                  <button onClick={()=>HandleEditDish(dish.id,'desserts')} className="edit"><FiEdit/></button>
+                                  <button onClick={()=>HandleDeleteDish(dish.id,'desserts')} className="delete"><FiXSquare/></button></div>
+                                 }
                               <img src={`${Url}${dish.avatar}`} alt="Foto do prato" />
                               <DishDetails onClick={()=>HandleDetails(id,dish.name,dish.description,`${Url}${dish.avatar}`,dish.price,dish.qtd)} to ='/details'>
                                <h1>{dish.name}&gt;</h1>
@@ -193,7 +227,7 @@ export function Home(){
                               <h2>R$ {dish.price}</h2>
                                <div className="Add_Area">
                                  <div>
-                                    <button onClick={()=>HandleReduce(dish.name,dish.qtd)}><img src={Less}  /></button>
+                                    <button onClick={()=>HandleReduce(dish.name,dish.qtd,desserts)}><img src={Less}  /></button>
                                     <h3>{dish.qtd>9?dish.qtd:`0${dish.qtd}`}</h3>
                                     <button onClick={()=>HandleClickAddQtd(id,dish.name,dish.price,`${Url}${dish.avatar}`,dish.qtd,desserts)}><img src={Plus}  /></button>
                                  </div>

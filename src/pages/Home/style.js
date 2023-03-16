@@ -32,7 +32,7 @@ position: relative;
 margin-bottom: 98px;
 
 .edit{
-    position: absolute;
+    
     margin-top: 20px;
     display: flex;
     margin-left: 9px;
@@ -48,6 +48,28 @@ font-family: 'Poppins', sans-serif;
 font-size: 14px;
 font-weight: 500;
 line-height: 24px;
+}
+.delete{
+    
+    margin-top: 20px;
+    display: flex;
+    margin-right: 9px;
+    display: flex;
+align-items: center;
+padding:10px 20px;
+background-color: ${({theme})=>theme.COLORS.RED};
+gap:11px;
+color:${({theme})=>theme.COLORS.WHITE};
+border: none;
+border-radius: 5px;
+font-family: 'Poppins', sans-serif;
+font-size: 14px;
+font-weight: 500;
+line-height: 24px;
+}
+.button_admin{
+    display: flex;
+    gap:15px;
 }
 .carousel{
     display: flex;
@@ -105,7 +127,7 @@ line-height: 24px;
   border:none;
   >img{
   width: 18px;
-  height: 18px;
+  object-fit: contain;
   color: ${({theme})=>theme.COLORS.WHITE};
   }
 
@@ -144,6 +166,10 @@ display: block;
 margin-right: 27px;
 margin-bottom: 8px;
 
+:hover{
+    transform: scale(1.1);
+    transition: all 1s;
+}
 
 
 
@@ -154,7 +180,7 @@ margin-bottom: 8px;
     width:176px;
     height:176px;
     border-radius:50%;
-    margin:56px 62px 16px;
+    margin:35px 62px 16px;
 }
 
 

@@ -11,8 +11,9 @@ import { useState } from "react"
 import { api } from "../../services/api"
 import { useContext } from "react"
 import { AuthContext } from "../../hooks/Auth"
-export function EditOrder(){
-    const {updateDish}= useContext(AuthContext)
+export function Edit(){
+    const {updateDish,dish_id,array_dish}= useContext(AuthContext)
+    console.log(dish_id,array_dish)
     const [tag,setTag]=useState([])
     const [newtag,setNewTag]= useState('')
     const [name,setName]=useState('')
@@ -42,23 +43,23 @@ export function EditOrder(){
                     description,
                     qtd
                 }
-             await api.post(`/${field}`,dish).then(response=>HandleSendPicture(response.data))
+             await api.put(`/${array_dish}/${dish_id}`,dish).then(HandleSendPicture(array_dish,dish_id))
 
-              async function HandleSendPicture(i){
+              async function HandleSendPicture(array,i){
                 const formData= new FormData()
                 formData.append("avatar",avatarfile)
         
-                  await api.patch(`/${field}/${i}`,formData)
+                  await api.patch(`/${array}/${i}`,formData)
         
                 }
-                alert(`Prato ${name} adicionado ao cardápio`)
+                alert(`Prato ${name} editado com sucesso`)
             }
         
               catch (error) {
                 if(error.response){
                     alert(error.response.data.message)
                 }else{
-                     alert(`Não foi possível adicionar o produto ao cardápio`)
+                     alert(`Não foi possível editar o produto`)
                 }
                    
                 }       
@@ -71,11 +72,11 @@ export function EditOrder(){
              <Header/>
                <Content>
                    <Buttonback/>
-                   <Section title='Cardápio'>
+                   <Section title='Editar prato'>
                      <Form >
                             <ImageArea>
                                 <div>
-                                  <p>Imagem do prato</p>
+                                  <p>Nova imagem do prato</p>
                          
                                    <Upload>
                                        <label htmlFor="upload">
@@ -85,7 +86,7 @@ export function EditOrder(){
                                        </label>
                                    </Upload>
                                 </div>
-                                <Input title='Nome' placeholder='Ex.:Salada Caesar' onChange={(e)=>setName(e.target.value)}/>
+                                <Input title='Novo nome' placeholder='Ex.:Salada Caesar' onChange={(e)=>setName(e.target.value)}/>
                             </ImageArea>
                     
                            <Ingredients_Price>
@@ -111,27 +112,20 @@ export function EditOrder(){
                                     </InputSection>
                                 </InfoArea>
                                 <div>
-                                <Input title='preço' onChange={e=>setPrice(e.target.value)}/>
+                                <Input title='Novo preço' onChange={e=>setPrice(e.target.value)}/>
                                 </div>
                           </Ingredients_Price>
                       
                            <InfoArea>
-                                <p>Descrição</p>
+                                <p>Nova descrição</p>
                                 <Description onChange={e=>setDescription(e.target.value)} />
                             </InfoArea>
-                            <div className="option_field">
-                                <p>Selecione o Cardápio</p>
-                            <select className="select_field" onChange={(e)=>setField(e.target.value)} name="options_dish" id="options_dish">
-                                 <option value=""></option>
-                                <option value="principals"> Pratos Principais</option>
-                                <option value="drinks">Bebidas</option>
-                                <option value="desserts">Sobremesas</option>
-                           </select>
-                            </div>
+                            
+                           
                             
                         </Form>
                         <Button onClick={HandleNewDish} >
-                            <h1>Adicionar</h1>
+                            <h1>Confirmar edição</h1>
                         </Button>
                    </Section>
                </Content>
