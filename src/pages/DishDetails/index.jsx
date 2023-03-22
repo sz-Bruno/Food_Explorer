@@ -15,9 +15,9 @@ import {AuthContext} from "../.././hooks/Auth"
 import { useNavigate } from "react-router-dom"
 export function DishDetails(){
      const navigate=useNavigate()
-    const {dish,count,setcount,HandleAddDishs,setSelectedDishs,HandleClickAddQtd,HandleClickAddDetails,HandleReduce} = useContext(AuthContext)
+    const {dish,count,ingredients,setcount,HandleAddDishs,setSelectedDishs,HandleClickAddQtd,HandleClickAddDetails,HandleReduce} = useContext(AuthContext)
     
-    console.log(dish)
+    console.log(dish,ingredients)
   const HandleAdd=(name,qtd)=>{
     
         
@@ -32,7 +32,7 @@ export function DishDetails(){
     
   }
     
-    
+  
     
          const HandleCart=()=>{
             console.log(dish)
@@ -45,23 +45,34 @@ export function DishDetails(){
                {
                 dish.map((item,id)=>(
                     <div key={id}>
-                    <img src={item.image} alt={item.name} />
+                    <img src={item.avatar} alt={item.title} />
                    <Description>
-                      <h1>{item.name}</h1>
+                      <h1>{item.title}</h1>
                       <h2>{item.description}</h2>
                       
+                            <div className="ingredients">
+                                {
+                        ingredients.map((item,id)=>(
+                           
+                                <span key={id}>{item.name}</span>
+                        ))
+                        }
+                            </div>
+                            
+                
                       <Add_Price_Area>
                        <h2>R$ {item.price}</h2>
                        <div>
-                         <button onClick={()=>HandleReduce(item.name,item.qtd,dish)}>
+                         <button onClick={()=>HandleReduce(item.title,item.qtd,dish)}>
                              <img src={Less}/>
                          </button>
                          <h3>{item.qtd<10? `0${item.qtd}`: item.qtd}</h3>
-                         <button onClick={()=>HandleClickAddDetails(item.id,item.name,item.price,item.image,item.qtd,dish)}>
+                        
+                         <button onClick={()=>HandleClickAddDetails(item.id,item.title,item.price,item.avatar,item.qtd,dish)}>
                              <img src={Plus}/>
                          </button>
                        </div>
-                       <ButtonInclude onClick={()=>HandleAdd(item.name,item.qtd)}title='incluir'/>
+                       <ButtonInclude onClick={()=>HandleAdd(item.title,item.qtd)}title='incluir'/>
                       </Add_Price_Area>
                    </Description>
                    

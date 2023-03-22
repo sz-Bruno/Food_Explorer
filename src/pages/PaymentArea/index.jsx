@@ -23,7 +23,7 @@ import { AuthContext } from "../../hooks/Auth"
 
     
 export function PaymentArea(){
- const {selectedDishs,HandleDeleteDishs}= useContext(AuthContext)
+ const {selectedDishs,setSelectedDishs,HandleDeleteDishs}= useContext(AuthContext)
 
   const [isPixVisible, setisPixVisible]= useState(false)
   const [isCardVisible, setisCardVisible]= useState(true)
@@ -58,6 +58,7 @@ export function PaymentArea(){
     setisButtonCardActived(false)
   }
   function HandlePayment(){
+   
     alert(`Total a pagar R$ ${total_price}`)
     setisPixVisible(false)
     setisCardVisible(false)
@@ -77,6 +78,8 @@ export function PaymentArea(){
         setisClockVisible(false)
         setisApprovedVisible(false)
         setisDeliveredVisible(true)
+        setSelectedDishs([])
+        
       },4000)
 
     },5000)
@@ -119,11 +122,11 @@ export function PaymentArea(){
                   {selectedDishs.map((item,id)=>
                   <Description
                   key={id}
-                  onClick={()=>HandleDeleteDishs(item.name)}
+                  onClick={()=>HandleDeleteDishs(item.title)}
                    
                   image={item.image}
                   qtd={item.qtd}
-                  name={item.name}
+                  name={item.title}
                   price={((item.price)*item.qtd).toFixed(2)}
                   />
                   )}
@@ -151,7 +154,7 @@ export function PaymentArea(){
                             <Input type= 'number' placeholder='04/25 ' title='Validade'/> 
                             <Input type= 'number' placeholder='04/25 ' title='CVC'/>
                             </div>
-                          <Button onClick={HandlePayment} img={buttonHeader} title='Finalizar Pagamento'/>
+                          <Button type ='submit' onClick={HandlePayment} img={buttonHeader} title='Finalizar Pagamento'/>
                         </CardArea>
                         }
 

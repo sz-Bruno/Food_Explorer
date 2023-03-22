@@ -10,7 +10,7 @@ import Plus from "../../assets/images/plusIcon.svg"
 import Ravanello from "../../assets/images/ravanello.png"
 import {FiPlus} from 'react-icons/fi'
 import {FiEdit} from 'react-icons/fi'
-import {FiXSquare} from 'react-icons/fi'
+import {FiXSquare,FiSearch} from 'react-icons/fi'
 import { api } from "../../services/api"
 import Candies from "../../assets/images/candies.svg"
 import { useState } from "react"
@@ -22,9 +22,9 @@ import ButtonBack from "../../assets/images/back_button.svg"
 import ButtonGo from "../../assets/images/go_button.svg"
 import { useRef } from "react"
 import { ButtonInclude } from "../../components/ButtonInclude"
-
+import { InputHeader } from "../../components/InputHeader"
 export function Home(){
-  const {count,HandleClickAddQtd,HandleAddDishs,HandleDetails,HandleReduce,setDish_id,setArray_dish}= useContext(AuthContext)
+  const {count,ingredients,setIngredients,HandleClickAddQtd,HandleAddDishs,HandleDetails,HandleReduce,setDish_id,setArray_dish}= useContext(AuthContext)
   const[isadmin,setIsadmin]=useState(true)
   const navigate= useNavigate()
    const carousel= useRef(null)
@@ -36,8 +36,11 @@ export function Home(){
    const [principals, setPrincipals]= useState([])
    const [drinks, setDrinks]= useState([])
    const [desserts, setDesserts]= useState([])
-   
+   const [data, setData]= useState([])
+   const [dishes, setDishes]= useState([])
+   const [find,setfind]= useState('')
    const Url="http://localhost:3000/files/"
+
    const HandleCreate=()=>{
      navigate("/edit")
    }
@@ -74,26 +77,20 @@ export function Home(){
    }
   
 
-   const HandleEditDish=(dish,array)=>{
-      setArray_dish(array)
-      setDish_id(dish)
-      navigate('/edit2')
-
-   }
+   
    async function LoadDish(){
-      const ResponsePrincipal= await api.get('/principals')
-      const ResponseDrinks= await api.get('/drinks')
-      const ResponseDessert= await api.get('/desserts')
-      setPrincipals(ResponsePrincipal.data)
-      setDrinks(ResponseDrinks.data)
-      setDesserts(ResponseDessert.data)
+       const array_dish=await api.get(`/dishes?title=${find}`)
+    
+      setDishes(array_dish.data.map(item=>item.dish))
+      setIngredients(array_dish.data.map(item=>item.ingredients))
       
+   
    }
    
-   const HandleDeleteDish=(dish,array)=>{
+   const HandleDeleteDish=(id)=>{
       const confirmation= confirm('Deseja excluir o prato do cardápio?')
       if(confirmation){
-         api.delete(`/${array}/${dish}`)
+         api.delete(`/dishes/${id}`)
          alert('Prato deletado do cardápio')
          LoadDish()
       }else{
@@ -101,12 +98,18 @@ export function Home(){
       }
       
    }
+   const HandleEditDish=(id)=>{
+      
+      setDish_id(id)
+      navigate('/edit2')
+
+   }
 
   useEffect(()=>{
    
    LoadDish()
   
-  },[])
+  },[find])
 
   
 
@@ -114,7 +117,7 @@ export function Home(){
    
      return(
          <TesteWrapper>
-              <Header/>
+              <Header><InputHeader onChange={(e)=>setfind(e.target.value)} icon={FiSearch} placeholder="Busque pelas opções de pratos"/></Header>
              
              <MainContent>
                   <img src={Candies} alt="Imagem de doces" />
@@ -134,27 +137,27 @@ export function Home(){
                        
                        
                        {
-                          principals.map((dish,id)=>(
+                          dishes.filter(dish=>dish.category==='principals').map((dish,id)=>(
                            
                            <div className="Dish_Wrapper" key={id}>
                               {isadmin&&
                                   <div className="button_admin">
-                                  <button onClick={()=>HandleEditDish(dish.id,'principals')} className="edit"><FiEdit/></button>
-                                  <button onClick={()=>HandleDeleteDish(dish.id,'principals')} className="delete"><FiXSquare/></button></div>
+                                  <button onClick={()=>HandleEditDish(dish.id)} className="edit"><FiEdit/></button>
+                                  <button onClick={()=>HandleDeleteDish(dish.id)} className="delete"><FiXSquare/></button></div>
                                  }
                               <img src={`${Url}${dish.avatar}`} alt="Foto do prato" />
-                              <DishDetails onClick={()=>HandleDetails(id,dish.name,dish.description,`${Url}${dish.avatar}`,dish.price,dish.qtd)} to ='/details'>
-                               <h1>{dish.name}&gt;</h1>
+                              <DishDetails onClick={()=>HandleDetails(dish.id)} to ='/details'>
+                               <h1>{dish.title}&gt;</h1>
                               </DishDetails>
                               <p>{dish.description}</p>
                               <h2>R$ {dish.price}</h2>
                                <div className="Add_Area">
                                  <div>
-                                    <button onClick={()=>HandleReduce(dish.name,dish.qtd,principals)}><img src={Less}  /></button>
+                                    <button onClick={()=>HandleReduce(dish.title,dish.qtd,dishes)}><img src={Less}  /></button>
                                     <h3 >{dish.qtd>9?dish.qtd:`0${dish.qtd}`}</h3>
-                                    <button onClick={()=>HandleClickAddQtd(id,dish.name,dish.price,`${Url}${dish.avatar}`,dish.qtd,principals)}><img src={Plus}  /></button>
+                                    <button onClick={()=>HandleClickAddQtd(dish.id,dish.title,dish.price,`${Url}${dish.avatar}`,dish.qtd,dishes)}><img src={Plus}  /></button>
                                  </div>
-                                 <ButtonInclude onClick={()=>HandleAddDishs(dish.name,dish.qtd)} title='incluir'/>
+                                 <ButtonInclude onClick={()=>HandleAddDishs(dish.title,dish.qtd)} title='incluir'/>
                                </div>
                                     
                            </div>
@@ -172,27 +175,27 @@ export function Home(){
                        
                        
                         {
-                          drinks.map((dish,id)=>(
+                          dishes.filter(dish=>dish.category==='drinks').map((dish,id)=>(
                            
                            <div className="Dish_Wrapper" key={id}>
                               {isadmin&&
                                   <div className="button_admin">
                                   <button onClick={()=>HandleEditDish(dish.id,'drinks')} className="edit"><FiEdit/></button>
-                                  <button onClick={()=>HandleDeleteDish(dish.id,'drinks')} className="delete"><FiXSquare/></button></div>
+                                  <button onClick={()=>HandleDeleteDish(dish.id)} className="delete"><FiXSquare/></button></div>
                                  }
                               <img src={`${Url}${dish.avatar}`} alt="Foto do prato" />
-                              <DishDetails onClick={()=>HandleDetails(id,dish.name,dish.description,`${Url}${dish.avatar}`,dish.price,dish.qtd)} to ='/details'>
-                               <h1>{dish.name}&gt;</h1>
+                              <DishDetails onClick={()=>HandleDetails(dish.id)} to ='/details'>
+                               <h1>{dish.title}&gt;</h1>
                               </DishDetails>
                               <p>{dish.description}</p>
                               <h2>R$ {dish.price}</h2>
                                <div className="Add_Area">
                                  <div>
-                                    <button onClick={()=>HandleReduce(dish.name,dish.qtd,drinks)}><img src={Less}  /></button>
+                                    <button onClick={()=>HandleReduce(dish.title,dish.qtd,dishes)}><img src={Less}  /></button>
                                     <h3>{dish.qtd>9?dish.qtd:`0${dish.qtd}`}</h3>
-                                    <button onClick={()=>HandleClickAddQtd(id,dish.name,dish.price,`${Url}${dish.avatar}`,dish.qtd,drinks)}><img src={Plus}  /></button>
+                                    <button onClick={()=>HandleClickAddQtd(dish.id,dish.title,dish.price,`${Url}${dish.avatar}`,dish.qtd,dishes)}><img src={Plus}  /></button>
                                  </div>
-                                 <ButtonInclude onClick={()=>HandleAddDishs(dish.name,dish.qtd)} title='incluir'/>
+                                 <ButtonInclude onClick={()=>HandleAddDishs(dish.title,dish.qtd)} title='incluir'/>
                                </div>
 
                            </div>
@@ -211,27 +214,27 @@ export function Home(){
                        
                         
                        {
-                          desserts.map((dish,id)=>(
+                          dishes.filter(dish=>dish.category==='desserts').map((dish,id)=>(
                            
                            <div className="Dish_Wrapper" key={id}>
                               {isadmin&&
                                   <div className="button_admin">
                                   <button onClick={()=>HandleEditDish(dish.id,'desserts')} className="edit"><FiEdit/></button>
-                                  <button onClick={()=>HandleDeleteDish(dish.id,'desserts')} className="delete"><FiXSquare/></button></div>
+                                  <button onClick={()=>HandleDeleteDish(dish.id)} className="delete"><FiXSquare/></button></div>
                                  }
                               <img src={`${Url}${dish.avatar}`} alt="Foto do prato" />
-                              <DishDetails onClick={()=>HandleDetails(id,dish.name,dish.description,`${Url}${dish.avatar}`,dish.price,dish.qtd)} to ='/details'>
-                               <h1>{dish.name}&gt;</h1>
+                              <DishDetails onClick={()=>HandleDetails(dish.id)} to ='/details'>
+                               <h1>{dish.title}&gt;</h1>
                               </DishDetails>
                               <p>{dish.description}</p>
                               <h2>R$ {dish.price}</h2>
                                <div className="Add_Area">
                                  <div>
-                                    <button onClick={()=>HandleReduce(dish.name,dish.qtd,desserts)}><img src={Less}  /></button>
+                                    <button onClick={()=>HandleReduce(dish.title,dish.qtd,dishes)}><img src={Less}  /></button>
                                     <h3>{dish.qtd>9?dish.qtd:`0${dish.qtd}`}</h3>
-                                    <button onClick={()=>HandleClickAddQtd(id,dish.name,dish.price,`${Url}${dish.avatar}`,dish.qtd,desserts)}><img src={Plus}  /></button>
+                                    <button onClick={()=>HandleClickAddQtd(dish.id,dish.title,dish.price,`${Url}${dish.avatar}`,dish.qtd,dishes)}><img src={Plus}  /></button>
                                  </div>
-                                 <ButtonInclude onClick={()=>HandleAddDishs(dish.name,dish.qtd)} title='incluir'/>
+                                 <ButtonInclude onClick={()=>HandleAddDishs(dish.title,dish.qtd)} title='incluir'/>
                                </div>
 
                            </div>

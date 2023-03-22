@@ -8,7 +8,7 @@ import { useContext } from "react"
 import { AuthContext } from "../../hooks/Auth"
 
 
-export function Header({onClick,...rest}){
+export function Header({children,onClick,...rest}){
   const {selectedDishs}= useContext(AuthContext)
   const HandleOut=()=>{
     console.log('saiu')
@@ -21,7 +21,7 @@ export function Header({onClick,...rest}){
             <h1>food explorer</h1>
           </HeaderLogo>
           <p>Meus Favoritos  </p>
-          <InputHeader onChange={(e)=>console.log(e.target.value)} icon={FiSearch} placeholder="Busque pelas opções de pratos"/>
+          {children}
           <ButtonHeader to='/payment' onClick={onClick} >
             <img src={buttonHeader} alt="logo do botão Meu Pedido" />
             <p>Meu pedido ({selectedDishs.length}) </p>

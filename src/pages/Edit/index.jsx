@@ -13,46 +13,47 @@ import { useContext } from "react"
 import { AuthContext } from "../../hooks/Auth"
 export function Edit(){
     const {updateDish,dish_id,array_dish}= useContext(AuthContext)
-    console.log(dish_id,array_dish)
-    const [tag,setTag]=useState([])
-    const [newtag,setNewTag]= useState('')
-    const [name,setName]=useState('')
+    
+    const [ingredients,setIngredient]=useState([])
+    const [newingredient,setNewIngredient]= useState('')
+    const [title,setTitle]=useState('')
     const [price,setPrice]=useState('')
     const [description,setDescription]=useState('')
     const [avatarfile,setAvatarFile]=useState('')
-    const [field,setField]=useState('')
     const qtd=0
    
     const Url="http://localhost:3000/files/"
 
-    const  HandleTag= async()=>{
-        setTag(prev=>[...prev,newtag])
-        setNewTag('')
+    const  HandleIngredient= async()=>{
+        setIngredient(prev=>[...prev,newingredient])
+        setNewIngredient('')
     }
        
             const HandleNewDish= async ()=>{
             try {
-                if(!name|| !price||!description|| !avatarfile){
+                if(!title|| !price||!description|| !avatarfile){
                     alert('Preencha todos os campos!')
                     return
                 }
                 const dish=
                 {
-                    name,
+                    title,
                     price,
                     description,
-                    qtd
+                    qtd,
+                    ingredients
                 }
-             await api.put(`/${array_dish}/${dish_id}`,dish).then(HandleSendPicture(array_dish,dish_id))
+             await api.put(`/dishes/${dish_id}`,dish).then(HandleSendPicture(response.data))
 
-              async function HandleSendPicture(array,i){
+              async function HandleSendPicture(i){
                 const formData= new FormData()
                 formData.append("avatar",avatarfile)
         
-                  await api.patch(`/${array}/${i}`,formData)
-        
+                  await api.patch(`/dishes/${i}`,formData)
+                      alert(`Prato ${title} editado com sucesso`)
                 }
-                alert(`Prato ${name} editado com sucesso`)
+                
+                
             }
         
               catch (error) {
@@ -86,7 +87,7 @@ export function Edit(){
                                        </label>
                                    </Upload>
                                 </div>
-                                <Input title='Novo nome' placeholder='Ex.:Salada Caesar' onChange={(e)=>setName(e.target.value)}/>
+                                <Input title='Novo nome' placeholder='Ex.:Salada Caesar' onChange={(e)=>setTitle(e.target.value)}/>
                             </ImageArea>
                     
                            <Ingredients_Price>
@@ -97,13 +98,13 @@ export function Edit(){
                                         <TagItem 
                                         isNew 
                                         placeholder='adicionar'
-                                        onChange={e=>setNewTag(e.target.value)}
-                                        value={newtag}
-                                        onClick={HandleTag}
+                                        onChange={e=>setNewIngredient(e.target.value)}
+                                        value={newingredient}
+                                        onClick={HandleIngredient}
                                         />
                                         
                                         {
-                                           tag.map((item,id)=>(
+                                           ingredients.map((item,id)=>(
                                             <TagItem
                                             key={id}
                                             value={item}/>

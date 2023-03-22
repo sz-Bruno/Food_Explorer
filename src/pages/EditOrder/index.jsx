@@ -13,45 +13,48 @@ import { useContext } from "react"
 import { AuthContext } from "../../hooks/Auth"
 export function EditOrder(){
     const {updateDish}= useContext(AuthContext)
-    const [tag,setTag]=useState([])
-    const [newtag,setNewTag]= useState('')
-    const [name,setName]=useState('')
+    const [ingredients,setIngredient]=useState([])
+    const [newingredient,setNewIngredient]= useState('')
+    const [title,setTitle]=useState('')
     const [price,setPrice]=useState('')
     const [description,setDescription]=useState('')
     const [avatarfile,setAvatarFile]=useState('')
-    const [field,setField]=useState('')
+    const [category,setCategory]=useState('')
     const qtd=0
    
     const Url="http://localhost:3000/files/"
 
-    const  HandleTag= async()=>{
-        setTag(prev=>[...prev,newtag])
-        setNewTag('')
+    const  HandleIngredient= async()=>{
+        setIngredient(prev=>[...prev,newingredient])
+        setNewIngredient('')
     }
        
             const HandleNewDish= async ()=>{
             try {
-                if(!name|| !price||!description|| !avatarfile){
+                if(!title|| !price||!description|| !avatarfile){
                     alert('Preencha todos os campos!')
                     return
                 }
                 const dish=
                 {
-                    name,
+                    title,
                     price,
                     description,
-                    qtd
+                    qtd,
+                    category,
+                    ingredients
+                    
                 }
-             await api.post(`/${field}`,dish).then(response=>HandleSendPicture(response.data))
+             await api.post(`/dishes`,dish).then(response=>HandleSendPicture(response.data))
 
               async function HandleSendPicture(i){
                 const formData= new FormData()
                 formData.append("avatar",avatarfile)
         
-                  await api.patch(`/${field}/${i}`,formData)
+                  await api.patch(`/dishes/${i}`,formData)
         
                 }
-                alert(`Prato ${name} adicionado ao cardápio`)
+                alert(`Prato ${title} adicionado ao cardápio`)
             }
         
               catch (error) {
@@ -85,7 +88,7 @@ export function EditOrder(){
                                        </label>
                                    </Upload>
                                 </div>
-                                <Input title='Nome' placeholder='Ex.:Salada Caesar' onChange={(e)=>setName(e.target.value)}/>
+                                <Input title='Nome' placeholder='Ex.:Salada Caesar' onChange={(e)=>setTitle(e.target.value)}/>
                             </ImageArea>
                     
                            <Ingredients_Price>
@@ -96,13 +99,13 @@ export function EditOrder(){
                                         <TagItem 
                                         isNew 
                                         placeholder='adicionar'
-                                        onChange={e=>setNewTag(e.target.value)}
-                                        value={newtag}
-                                        onClick={HandleTag}
+                                        onChange={e=>setNewIngredient(e.target.value)}
+                                        value={newingredient}
+                                        onClick={HandleIngredient}
                                         />
                                         
                                         {
-                                           tag.map((item,id)=>(
+                                           ingredients.map((item,id)=>(
                                             <TagItem
                                             key={id}
                                             value={item}/>
@@ -121,7 +124,7 @@ export function EditOrder(){
                             </InfoArea>
                             <div className="option_field">
                                 <p>Selecione o Cardápio</p>
-                            <select className="select_field" onChange={(e)=>setField(e.target.value)} name="options_dish" id="options_dish">
+                            <select className="select_field" onChange={(e)=>setCategory(e.target.value)} name="options_dish" id="options_dish">
                                  <option value=""></option>
                                 <option value="principals"> Pratos Principais</option>
                                 <option value="drinks">Bebidas</option>

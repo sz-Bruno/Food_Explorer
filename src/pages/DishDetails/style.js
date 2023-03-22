@@ -7,7 +7,23 @@ height: 100vh;
 display:grid;
 grid-template-areas: "header" "content" "footer";
 grid-template-rows: 104px auto 77px;
+ 
+ .ingredients{
+    display: flex;
+    margin-top: 26px;
+    gap:23px;
+    font-family: 'Poppins', sans-serif;
+    font-weight:400;
+    font-size:18px;
+    line-height:25px;
+    color:${({theme})=>theme.COLORS.HEADER_GRAY};
+    >span{
+        padding:4px 8px;
+        border-radius: 5px;
+        background-color: #192227;
+    }
 
+ }
 `
 export const Content= styled.div`
 grid-area: content;
