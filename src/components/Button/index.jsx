@@ -2,9 +2,9 @@
 
 import {ButtonWrapper} from "./style"
 
-export function Button({title,img,...rest}){
+export function Button({title,img,onClick,...rest}){
     return(
-        <ButtonWrapper {...rest}>
+        <ButtonWrapper onClick={onClick} {...rest}>
            <img src={img} />
           {title}
         </ButtonWrapper>

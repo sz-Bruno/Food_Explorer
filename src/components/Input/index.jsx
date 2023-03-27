@@ -1,10 +1,10 @@
 import { InputWrapper } from "./style"
 
-export function Input({title,...rest}){
+export function Input({title, onChange,...rest}){
     return(
         <InputWrapper >
           <label htmlFor="text">{title}</label>
-        <input type="text"{...rest}  />
+        <input type="text"{...rest} onChange={onChange} />
       
            </InputWrapper>
     )

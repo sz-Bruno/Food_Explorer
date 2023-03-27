@@ -11,7 +11,7 @@ import { useState } from "react"
 import { api } from "../../services/api"
 import { useContext } from "react"
 import { AuthContext } from "../../hooks/Auth"
-export function EditOrder(){
+export function Create(){
     const {updateDish}= useContext(AuthContext)
     const [ingredients,setIngredient]=useState([])
     const [newingredient,setNewIngredient]= useState('')

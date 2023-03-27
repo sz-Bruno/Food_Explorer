@@ -30,11 +30,13 @@ export function Edit(){
     }
        
             const HandleNewDish= async ()=>{
-            try {
                 if(!title|| !price||!description|| !avatarfile){
                     alert('Preencha todos os campos!')
                     return
                 }
+               
+                try {
+                  
                 const dish=
                 {
                     title,
@@ -43,16 +45,18 @@ export function Edit(){
                     qtd,
                     ingredients
                 }
-             await api.put(`/dishes/${dish_id}`,dish).then(HandleSendPicture(response.data))
+               
+             await api.put(`/dishes/${dish_id}`,dish).then(HandleSendPicture(dish_id))
 
               async function HandleSendPicture(i){
                 const formData= new FormData()
                 formData.append("avatar",avatarfile)
         
                   await api.patch(`/dishes/${i}`,formData)
-                      alert(`Prato ${title} editado com sucesso`)
+                      
                 }
                 
+                alert(`Prato ${title} editado com sucesso`)
                 
             }
         

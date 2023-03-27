@@ -5,7 +5,7 @@ import {SignIn} from './pages/SignIn'
 import { Home } from './pages/Home'
 import {PaymentArea} from "./pages/PaymentArea"
 import {OrderStatus} from "./pages/OrderStatus"
-import { EditOrder } from './pages/EditOrder'
+import { Create } from './pages/Create'
 import { DishDetails } from './pages/DishDetails'
 import { Routes } from './Routes'
 import GloalStyle from "./styles/global"

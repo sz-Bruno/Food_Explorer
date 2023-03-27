@@ -24,8 +24,8 @@ import { useRef } from "react"
 import { ButtonInclude } from "../../components/ButtonInclude"
 import { InputHeader } from "../../components/InputHeader"
 export function Home(){
-  const {count,ingredients,setIngredients,HandleClickAddQtd,HandleAddDishs,HandleDetails,HandleReduce,setDish_id,setArray_dish}= useContext(AuthContext)
-  const[isadmin,setIsadmin]=useState(true)
+  const {count,isadmin,ingredients,setIngredients,HandleClickAddQtd,HandleAddDishs,HandleDetails,HandleReduce,setDish_id,setArray_dish}= useContext(AuthContext)
+ 
   const navigate= useNavigate()
    const carousel= useRef(null)
    const carousel2= useRef(null)
@@ -42,7 +42,7 @@ export function Home(){
    const Url="http://localhost:3000/files/"
 
    const HandleCreate=()=>{
-     navigate("/edit")
+     navigate("/create")
    }
    
    const HandleClickLeftPrincipal=(e)=>{
@@ -101,7 +101,7 @@ export function Home(){
    const HandleEditDish=(id)=>{
       
       setDish_id(id)
-      navigate('/edit2')
+      navigate('/edit')
 
    }
 

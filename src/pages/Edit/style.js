@@ -50,7 +50,7 @@ margin-bottom: 194px;
 `
 
 export const Upload= styled.div`
- width: 220px;
+ width: 200px;
  height: 48px;
  display: flex;
  align-items: center;
@@ -71,10 +71,7 @@ label{
     color:${({theme})=>theme.COLORS.WHITE};
     gap:8px;
     color:white;
-   >svg{
-    width: 24px;
-    height: 24px;
-   }
+  
 }
 input{
     display: none;

@@ -14,6 +14,8 @@ function AuthProvider({children}){
     const [dish_id,setDish_id]= useState('')
     const [array_dish, setArray_dish]=useState('')
     const [ingredients, setIngredients]= useState([])
+    const [data,setData]= useState({})
+    const[isadmin,setIsadmin]=useState(false)
    async function updateDish({dish_created,id,avatar}){
     const fileuploadform= new FormData()
     fileuploadform.append('avatar',avatar)
@@ -21,6 +23,28 @@ function AuthProvider({children}){
     const response= await api.patch(`/principals/${id}`,fileuploadform)
     dish_created.avatar= response.data.avatar
     console.log(response)
+   }
+
+   async function SignIn({email,password}){
+
+      try {
+        const response= await api.post('/sessions',{ email,password})
+
+        const {User,token}= response.data
+        console.log(User[0].name)
+        api.defaults.headers.authorization=`Bearer ${token}`
+        setData({User,token})
+        if(User[0].name==="Bruno de Souza"){
+            setIsadmin(true)
+        }
+         
+      } catch (error) {
+        if(error.response){
+            alert(error.response.data.message)
+        }else{
+            alert('Não foi possível entrar.')
+        }
+      }
    }
 
      async function HandleDetails(id){
@@ -150,7 +174,7 @@ function AuthProvider({children}){
     
     
     return(
-        <AuthContext.Provider value={{dish,ingredients,setIngredients,count,setcount,dish_id,setDish_id,array_dish, setArray_dish,selectedDishs,setSelectedDishs,setDish,HandleDetails,HandleAddDishs,HandleDeleteDishs,HandleClickAddQtd,HandleReduce,HandleClickAddDetails,updateDish}}>
+        <AuthContext.Provider value={{dish,ingredients,SignIn,User:data.User,setIngredients,isadmin,count,setcount,dish_id,setDish_id,array_dish, setArray_dish,selectedDishs,setSelectedDishs,setDish,HandleDetails,HandleAddDishs,HandleDeleteDishs,HandleClickAddQtd,HandleReduce,HandleClickAddDetails,updateDish}}>
             {children}
         </AuthContext.Provider>
     )
