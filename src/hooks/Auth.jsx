@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { createContext  } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../services/api";
@@ -24,17 +24,32 @@ function AuthProvider({children}){
     dish_created.avatar= response.data.avatar
     console.log(response)
    }
-
+   
+   async function SignUp({name,email,password,Admin}){
+    try {
+        await api.post('/users',{name,email,password,Admin})
+        alert('Usuário cadastrado com sucesso!')
+    } catch (error) {
+        if(error.response){
+            alert(error.response.data.message)
+        }else{
+            alert('Não foi possível cadastrar.')
+        }
+        
+    }
+   }
    async function SignIn({email,password}){
 
       try {
         const response= await api.post('/sessions',{ email,password})
 
         const {User,token}= response.data
+        localStorage.setItem("@foodexplorer:user", JSON.stringify(User))
+        localStorage.setItem("@foodexplorer:token", token)
         console.log(User[0].name)
         api.defaults.headers.authorization=`Bearer ${token}`
         setData({User,token})
-        if(User[0].name==="Bruno de Souza"){
+        if(User[0].Admin===1){
             setIsadmin(true)
         }
          
@@ -46,6 +61,28 @@ function AuthProvider({children}){
         }
       }
    }
+   
+   function SignOut(){
+    localStorage.removeItem("@foodexplorer:token")
+    localStorage.removeItem("@foodexplorer:user")
+
+    setData({})
+   }
+   useEffect(()=>{
+    const token= localStorage.getItem("@foodexplorer:token")
+    const user=localStorage.getItem("@foodexplorer:user")
+
+    if(user && token){
+        api.defaults.headers.authorization=`Bearer ${token}`
+
+        setData({
+            token,
+            User:JSON.parse(user)
+        })
+    }
+
+   },[])
+
 
      async function HandleDetails(id){
          const dish= await api.get(`/Dishes/${id}`)
@@ -174,7 +211,7 @@ function AuthProvider({children}){
     
     
     return(
-        <AuthContext.Provider value={{dish,ingredients,SignIn,User:data.User,setIngredients,isadmin,count,setcount,dish_id,setDish_id,array_dish, setArray_dish,selectedDishs,setSelectedDishs,setDish,HandleDetails,HandleAddDishs,HandleDeleteDishs,HandleClickAddQtd,HandleReduce,HandleClickAddDetails,updateDish}}>
+        <AuthContext.Provider value={{dish,ingredients,SignIn,SignUp,SignOut,User:data.User,setIngredients,isadmin,count,setcount,dish_id,setDish_id,array_dish, setArray_dish,selectedDishs,setSelectedDishs,setDish,HandleDetails,HandleAddDishs,HandleDeleteDishs,HandleClickAddQtd,HandleReduce,HandleClickAddDetails,updateDish}}>
             {children}
         </AuthContext.Provider>
     )

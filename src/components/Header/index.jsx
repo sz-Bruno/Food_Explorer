@@ -9,10 +9,10 @@ import { AuthContext } from "../../hooks/Auth"
 
 
 export function Header({children,onClick,...rest}){
-  const {selectedDishs}= useContext(AuthContext)
-  const HandleOut=()=>{
-    console.log('saiu')
-  }
+
+  
+  const {selectedDishs,SignOut}= useContext(AuthContext)
+  
  
     return(
         <HeaderWrapper{...rest}>
@@ -27,7 +27,7 @@ export function Header({children,onClick,...rest}){
             <p>Meu pedido ({selectedDishs.length}) </p>
           </ButtonHeader>
           
-          <button className="Out_button" onClick={HandleOut}>
+          <button className="Out_button" onClick={SignOut}>
           <img src={signOutButton} alt="botão signout" />
           </button>
            
