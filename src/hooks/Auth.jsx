@@ -51,6 +51,8 @@ function AuthProvider({children}){
         setData({User,token})
         if(User[0].Admin===1){
             setIsadmin(true)
+        }else{
+            setIsadmin(false)
         }
          
       } catch (error) {

@@ -16,6 +16,7 @@ export function Header({children,onClick,...rest}){
  
     return(
         <HeaderWrapper{...rest}>
+        
           <HeaderLogo to='/'>
             <img src={logo} alt="Logo do Explorer" />
             <h1>food explorer</h1>
@@ -31,6 +32,8 @@ export function Header({children,onClick,...rest}){
           <img src={signOutButton} alt="botão signout" />
           </button>
            
+       
+          
     
            
 

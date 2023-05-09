@@ -20,8 +20,6 @@ overflow: auto;
 
 
 
-
-
 `
 
 export const MainContent= styled.section`
@@ -30,6 +28,34 @@ padding:0 125px;
 grid-area: content;
 position: relative;
 margin-bottom: 98px;
+
+@media(max-width:1300px){
+    width: 80%;
+    padding:0 ;
+    justify-self: center;
+
+    
+}
+@media(max-width:1070px){
+    width: 70%;
+   padding:0  ;
+
+    
+}
+@media(max-width:615px){
+    width:70%;
+   padding:20px  ;
+   
+
+    
+}
+@media(max-width:500px){
+    width:100%;
+   padding:0px 10px ;
+   
+
+    
+}
 
 .edit{
     
@@ -73,14 +99,30 @@ line-height: 24px;
 }
 .carousel{
     display: flex;
-    width: 1120px;
+    max-width: 1120px;
     
     overflow-x: scroll;
     ::-webkit-scrollbar{
         display: none;
     }
     
-    
+  @media(max-width:1070px){
+    width: 600px;
+  }
+  @media(max-width:768px){
+    max-width:500px
+  
+  }
+  @media(max-width:615px){
+    width: 100%;
+  
+  }
+  @media(max-width:467px){
+
+  width: 65%;
+ 
+  
+  }
 }
 .left{
     background: linear-gradient(rgba(0, 10, 15, 0.27),rgba(0, 10, 15, 1));
@@ -90,6 +132,12 @@ line-height: 24px;
     height: 448px;
    :hover{
     filter: brightness(3.0);
+   }
+   @media(max-width:768px){
+   display: none;
+   width: 80px;
+   height: 200px;
+   
    }
 }
 .right{
@@ -102,13 +150,31 @@ line-height: 24px;
     :hover{
     filter: brightness(3.0);
    }
+   @media(max-width:1300px){
+   
+   left:880px
+
+   }
+   @media(max-width:1070px){
+   
+   left:500px
+   
+   }
+   @media(max-width:768px){
+   display: none;
+    left: 150px;
+   width: 80px;
+   height: 200px;
+   
+   }
+   
 }
 .Add_Area{
     display: flex;
   width: 208px;
   justify-content: center;
   margin:17px 46px 36px 46px;
-  
+ 
 >div{
   font-size: 20px;
   font-family: 'Roboto', sans-serif;
@@ -139,6 +205,13 @@ line-height: 24px;
  }
   
 }
+@media(max-width:760px){
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+   
+}
 }
 .add_dish{
     display: flex;
@@ -166,6 +239,7 @@ display: block;
 margin-right: 27px;
 margin-bottom: 8px;
 
+
 :hover{
     transform: scale(1.1);
     transition: all 1s;
@@ -181,6 +255,8 @@ margin-bottom: 8px;
     height:176px;
     border-radius:50%;
     margin:35px 62px 16px;
+
+  
 }
 
 
@@ -195,7 +271,8 @@ text-align: justify;
 color: ${({theme})=>theme.COLORS.GREY_INPUT};
 font-family: 'Roboto', sans-serif;
 font-style: 'Regular';
-  
+
+
 }
 >h2{
 line-height: 51px;
@@ -203,24 +280,45 @@ font-size: 32px;
 color: ${({theme})=>theme.COLORS.GREEN_MONEY};
 font-family: 'Roboto', sans-serif;
 font-weight: 400;
+@media(max-width:760px){
+    line-height: 12px;
+    font-size: 12px;
+}
+
 }
 
 }
 
 >img{
+    
    position: absolute;
     top:18px;
     left: 70px;
     animation-name:  topdown;
     animation-duration: 4s;
-   
+
+    @media(max-width:1070px){
+     width: 400px;
+     top:170px;
+     left:0px
+    }
+    @media(max-width:615px){
+        width: 200px;
+        top:90px;
+        left:0px
+       }
+      
+       @media(max-width:500px){
+        width: 200px;
+        top:70px;
+        left:10px
+       }
 }
 
 >div{
    
     background-image: linear-gradient(${({theme})=>theme.COLORS.LOGO_CANDIE});
     color:blue;
-    width:1120px;
     height: 260px;
     margin-top: 164px;
     margin-bottom: 48px;
@@ -228,8 +326,8 @@ font-weight: 400;
     gap:8px;
     display:flex;
     flex-direction: column;
-
-
+    width: 100%;
+    
     >h1{
        
     font-family: 'Poppins', sans-serif;
@@ -255,6 +353,52 @@ font-weight: 400;
      animation-name:  leftright;
     animation-duration: 4s;
     }
+    @media(max-width:1024px){
+        h1{
+            font-size: 20px;
+            line-height: 14px;
+            margin-left:400px
+        }
+        p{
+            font-size: 14px;
+            line-height: 14px;
+            margin-left: 410px;
+        }
+    }
+    @media(max-width:768px){
+      
+      
+        h1{
+            font-size: 14px;
+            line-height: 12px;
+            margin-left:380px
+        }
+        p{
+            font-size: 12px;
+            line-height: 12px;
+            margin-left: 410px;
+        }
+    }
+    @media(max-width:615px){
+        width: 300px;
+        height: 180px;
+        margin-top:20px ;
+    }
+    
+    @media(max-width:500px){
+        max-width: 400px;
+        h1{
+            font-size: 12px;
+            line-height: 12px;
+            margin-left:200px
+        }
+        p{
+            font-size: 10px;
+            line-height: 12px;
+            margin-left: 180px;
+        }
+    }
+    
 }
 
 @keyframes topdown{
@@ -304,6 +448,8 @@ margin-bottom: 18px;
 color: ${({theme})=>theme.COLORS.HEADER_GRAY};
 font-family: 'Poppins', sans-serif;
 font-style: 'Bold';
+
 }
+
 
 `

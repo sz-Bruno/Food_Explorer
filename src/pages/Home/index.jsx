@@ -24,8 +24,18 @@ import { useRef } from "react"
 import { ButtonInclude } from "../../components/ButtonInclude"
 import { InputHeader } from "../../components/InputHeader"
 export function Home(){
-  const {count,isadmin,ingredients,setIngredients,HandleClickAddQtd,HandleAddDishs,HandleDetails,HandleReduce,setDish_id,setArray_dish}= useContext(AuthContext)
+  const {count,
+   isadmin,
+   ingredients,
+   setIngredients,
+   HandleClickAddQtd,
+   HandleAddDishs,
+   HandleDetails,
+   HandleReduce,
+   setDish_id,
+   setArray_dish}= useContext(AuthContext)
  
+
   const navigate= useNavigate()
    const carousel= useRef(null)
    const carousel2= useRef(null)
@@ -80,7 +90,7 @@ export function Home(){
    
    async function LoadDish(){
        const array_dish=await api.get(`/dishes?title=${find}`)
-    
+       
       setDishes(array_dish.data.map(item=>item.dish))
       setIngredients(array_dish.data.map(item=>item.ingredients))
       
