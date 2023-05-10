@@ -6,6 +6,7 @@ width: 100%;
 grid-area: content;
 margin-top: 35px;
 
+   
 
 >h1{
    
@@ -24,6 +25,11 @@ margin-top: 35px;
    font-weight:500;
    font-size:26px;
    line-height:20px;
+   @media(max-width:768px){
+        
+        margin-bottom: 50px;
+    
+}
 }
 
 

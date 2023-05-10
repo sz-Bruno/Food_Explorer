@@ -11,12 +11,17 @@ grid-template-areas:
 ;
 grid-template-rows: 104px auto 77px ;
 width: 100%;
-height: 100vh;
+
+
+
+
 
 `
 
 export const CashSection= styled.section`
+
 width: 100%;
+height: 100%;
 height: 445px;
 border: 1px solid rgba(255, 255, 255, 0.1);
 

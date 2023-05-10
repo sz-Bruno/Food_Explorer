@@ -23,68 +23,40 @@ width: 100%;
 >p{
     font-family: 'Roboto', sans-serif;
     font-size:16px;
-    line-height: 26px;
+   
     
     color:${({theme})=>theme.COLORS.HEADER_GRAY};
 }
 
 @media(max-width:768px){
     padding: 0px;
+    justify-content: center;
+    gap:40px
 }
 @media(max-width:675px){
     
     justify-content: space-around;
-    gap:15px
+    gap:15px;
     p{
         font-size: 10px;
-        line-height: 10px;
+        
     }
     h1{
-        font-size: 12px;
-        line-height: 12px;
+        font-size: 16px;
+    
     }
     .Out_button{
         img{
-            width: 15px;
+            width: 20px;
         }
     }
 }
 @media(max-width:526px){
-    padding: 0 20px;
-    justify-content: left;
-    gap:20px;
-    p{
-        font-size: 10px;
-        line-height: 10px;
-    }
-    h1{
-        font-size: 12px;
-        line-height: 12px;
-    }
-    .Out_button{
-        img{
-            width: 15px;
-        }
-    }
-}
-@media(max-width:375px){
-    padding: 0 20px;
-    justify-content: space-between;
+    justify-content: center;
+    gap:30px;
    
-    p{
-        font-size: 10px;
-        line-height: 10px;
-    }
-    h1{
-        font-size: 12px;
-        line-height: 12px;
-    }
-    .Out_button{
-        img{
-            width: 12px;
-        }
-    }
 }
+
 
 
 `
@@ -97,7 +69,7 @@ export const HeaderLogo=styled(Link)`
     >h1{
     font-family: 'Roboto', sans-serif;
     font-size:25px;
-    line-height: 29px;
+    line-height: 19px;
     font-weight: 700;
     color:${({theme})=>theme.COLORS.WHITE};
     }
@@ -113,12 +85,12 @@ export const HeaderLogo=styled(Link)`
         width: 20px;
     }
         @media(max-width:675px){
-            padding: 0px;
+           
             >h1{
-        font-size: 12px;
+        font-size: 16px;
           }
     >img{
-        width: 16px;
+        width: 20px;
     }
         }
        

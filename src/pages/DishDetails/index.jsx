@@ -1,5 +1,5 @@
 
-import {DetailsWrapper,Content,Description,Ingredients_List,Add_Price_Area} from "./style"
+import {DetailsWrapper,Content,Description,Add_Price_Area} from "./style"
 import { Header } from "../../components/Header"
 import { Footer } from "../../components/Footer"
 import { Buttonback } from "../../components/ButtonBack"
@@ -44,7 +44,7 @@ export function DishDetails(){
                 <Buttonback />
                {
                 dish.map((item,id)=>(
-                    <div key={id}>
+                    <div key={id} className="details">
                     <img src={item.avatar} alt={item.title} />
                    <Description>
                       <h1>{item.title}</h1>

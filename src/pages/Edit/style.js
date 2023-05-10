@@ -22,6 +22,12 @@ gap:5px;
     line-height: 16px;
     font-family: 'Roboto', sans-serif;
 }
+@media(max-width:425px){
+    width: 300px;
+}
+@media(max-width:375px){
+    width: 100px;
+}
 
 }
 .select_field{
@@ -47,6 +53,16 @@ margin-bottom: 194px;
     display: flex;
 }
 
+@media(max-width:1024px){
+    width: 80%;
+}
+@media(max-width:768px){
+    width: 100%;
+}
+@media(max-width:425px){
+    width: 100%;
+    padding: 10px;
+}
 `
 
 export const Upload= styled.div`
@@ -159,5 +175,13 @@ h1{
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
 }
+@media(max-width:1024px){
+    width: 200px;
+    margin-left: 00px;
 
+}
+@media(max-width:375px){
+    margin-top: 50px;
+    
+}
 `

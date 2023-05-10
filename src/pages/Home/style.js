@@ -174,6 +174,9 @@ line-height: 24px;
   width: 208px;
   justify-content: center;
   margin:17px 46px 36px 46px;
+  @media(max-width:425px){
+    margin:0 auto;
+  }
  
 >div{
   font-size: 20px;
@@ -280,10 +283,7 @@ font-size: 32px;
 color: ${({theme})=>theme.COLORS.GREEN_MONEY};
 font-family: 'Roboto', sans-serif;
 font-weight: 400;
-@media(max-width:760px){
-    line-height: 12px;
-    font-size: 12px;
-}
+
 
 }
 
@@ -380,13 +380,13 @@ font-weight: 400;
         }
     }
     @media(max-width:615px){
-        width: 300px;
+        width: 60%;
         height: 180px;
         margin-top:20px ;
     }
     
     @media(max-width:500px){
-        max-width: 400px;
+        
         h1{
             font-size: 12px;
             line-height: 12px;

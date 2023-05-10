@@ -114,7 +114,7 @@ export function PaymentArea(){
     
     
     return(
-        <PaymentWrapper>
+        <PaymentWrapper >
             <Header/>
             <Payment >
                 <Section title="Meu pedido"  total={total_price}   >
