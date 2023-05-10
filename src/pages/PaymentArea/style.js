@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 
 export const PaymentWrapper= styled.div`
+
 display: grid;
 grid-template-areas: 
 "header"
@@ -11,17 +12,18 @@ grid-template-areas:
 ;
 grid-template-rows: 104px auto 77px ;
 width: 100%;
-
-
-
-
+height: 100vh;
+overflow: auto;
+&&::-webkit-scrollbar{
+    display: none;
+}
 
 `
 
 export const CashSection= styled.section`
 
 width: 100%;
-height: 100%;
+
 height: 445px;
 border: 1px solid rgba(255, 255, 255, 0.1);
 
@@ -58,6 +60,9 @@ display: flex;
 flex-direction: column;
 padding:57px 91px;
 
+@media(max-width:425px){
+    padding:10px
+}
 >div{
     display: flex;
     gap:14px;

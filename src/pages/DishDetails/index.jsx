@@ -3,19 +3,15 @@ import {DetailsWrapper,Content,Description,Add_Price_Area} from "./style"
 import { Header } from "../../components/Header"
 import { Footer } from "../../components/Footer"
 import { Buttonback } from "../../components/ButtonBack"
-import { Ingredients } from "../../components/Ingredients"
-import Ravanello from "../../assets/images/ravanello.png"
-import Alface from "../../assets/images/alface.png"
 import Less from "../../assets/images/lessIcon.svg"
 import Plus from "../../assets/images/plusIcon.svg"
 import { ButtonInclude } from "../../components/ButtonInclude"
-import { useState } from "react"
 import { useContext } from "react"
 import {AuthContext} from "../.././hooks/Auth"
 import { useNavigate } from "react-router-dom"
 export function DishDetails(){
      const navigate=useNavigate()
-    const {dish,count,ingredients,setcount,HandleAddDishs,setSelectedDishs,HandleClickAddQtd,HandleClickAddDetails,HandleReduce} = useContext(AuthContext)
+    const {dish,ingredients,HandleClickAddDetails,HandleReduce} = useContext(AuthContext)
     
     console.log(dish,ingredients)
   const HandleAdd=(name,qtd)=>{

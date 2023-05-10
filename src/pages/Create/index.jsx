@@ -9,10 +9,9 @@ import { Buttonback } from "../../components/ButtonBack"
 import {FiUpload} from 'react-icons/fi'
 import { useState } from "react"
 import { api } from "../../services/api"
-import { useContext } from "react"
-import { AuthContext } from "../../hooks/Auth"
+
 export function Create(){
-    const {updateDish}= useContext(AuthContext)
+    
     const [ingredients,setIngredient]=useState([])
     const [newingredient,setNewIngredient]= useState('')
     const [title,setTitle]=useState('')
@@ -22,7 +21,7 @@ export function Create(){
     const [category,setCategory]=useState('')
     const qtd=0
    
-    const Url="http://localhost:3000/files/"
+    
 
     const  HandleIngredient= async()=>{
         setIngredient(prev=>[...prev,newingredient])

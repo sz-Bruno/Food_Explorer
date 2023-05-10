@@ -12,7 +12,7 @@ import { api } from "../../services/api"
 import { useContext } from "react"
 import { AuthContext } from "../../hooks/Auth"
 export function Edit(){
-    const {updateDish,dish_id,array_dish}= useContext(AuthContext)
+    const {dish_id}= useContext(AuthContext)
     
     const [ingredients,setIngredient]=useState([])
     const [newingredient,setNewIngredient]= useState('')
@@ -22,7 +22,7 @@ export function Edit(){
     const [avatarfile,setAvatarFile]=useState('')
     const qtd=0
    
-    const Url="http://localhost:3000/files/"
+   
 
     const  HandleIngredient= async()=>{
         setIngredient(prev=>[...prev,newingredient])

@@ -14,5 +14,8 @@ margin-bottom:100%;
     display: flex;
     flex-direction: column;
 }
-
+@media(max-width:425px){
+    width: 300px;
+    padding: 0 20px;
+}
 `

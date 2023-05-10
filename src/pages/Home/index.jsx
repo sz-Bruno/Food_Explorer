@@ -3,11 +3,8 @@ import {TesteWrapper,MainContent,DishDetails} from "./style"
 import { Header } from "../../components/Header"
 import { Footer } from "../../components/Footer"
 import { Section } from "../../components/Section"
-import { Options } from "../../components/Options"
-import { Dish } from "../../components/Dish"
 import Less from "../../assets/images/lessIcon.svg"
 import Plus from "../../assets/images/plusIcon.svg"
-import Ravanello from "../../assets/images/ravanello.png"
 import {FiPlus} from 'react-icons/fi'
 import {FiEdit} from 'react-icons/fi'
 import {FiXSquare,FiSearch} from 'react-icons/fi'
@@ -24,29 +21,21 @@ import { useRef } from "react"
 import { ButtonInclude } from "../../components/ButtonInclude"
 import { InputHeader } from "../../components/InputHeader"
 export function Home(){
-  const {count,
+  const {
    isadmin,
-   ingredients,
    setIngredients,
    HandleClickAddQtd,
    HandleAddDishs,
    HandleDetails,
    HandleReduce,
    setDish_id,
-   setArray_dish}= useContext(AuthContext)
+   }= useContext(AuthContext)
  
 
   const navigate= useNavigate()
    const carousel= useRef(null)
    const carousel2= useRef(null)
    const carousel3= useRef(null)
-   const [name,setName]= useState('')
-   const [description,setDescription]= useState('')
-   const [price,setPrice]= useState('')
-   const [principals, setPrincipals]= useState([])
-   const [drinks, setDrinks]= useState([])
-   const [desserts, setDesserts]= useState([])
-   const [data, setData]= useState([])
    const [dishes, setDishes]= useState([])
    const [find,setfind]= useState('')
    const Url="http://localhost:3000/files/"

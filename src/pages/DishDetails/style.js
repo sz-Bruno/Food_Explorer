@@ -4,11 +4,14 @@ import styled from "styled-components";
 
 export const DetailsWrapper= styled.div`
 width: 100%;
-
+height: 100vh;
 display:grid;
 grid-template-areas: "header" "content" "footer";
 grid-template-rows: 104px auto 77px;
-overflow: hidden;
+overflow: auto;
+&&::-webkit-scrollbar{
+    display: none;
+}
  .ingredients{
     display: flex;
     margin-top: 26px;

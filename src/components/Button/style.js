@@ -20,5 +20,8 @@ font-family: 'Poppins', sans-serif;
 font-size: 14px;
 line-height: 24px;
 
+@media(max-width:425px){
+    width: 200px;
+}
 
 `
