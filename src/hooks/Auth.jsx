@@ -88,7 +88,7 @@ function AuthProvider({children}){
 
      async function HandleDetails(id){
          const dish= await api.get(`/Dishes/${id}`)
-         const url="http://localhost:3000/files/"
+         const url="https://fd-explorer-api.onrender.com/files/"
           const newdish={ 
             id:dish.data.id,
             avatar:`${url}${dish.data.avatar}`,

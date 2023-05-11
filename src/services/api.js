@@ -1,5 +1,5 @@
 import  Axios  from "Axios";
 
 export const api= Axios.create({
-    baseURL:"http://localhost:3000"
+    baseURL:"https://fd-explorer-api.onrender.com/"
 })

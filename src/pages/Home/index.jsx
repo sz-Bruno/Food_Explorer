@@ -38,7 +38,7 @@ export function Home(){
    const carousel3= useRef(null)
    const [dishes, setDishes]= useState([])
    const [find,setfind]= useState('')
-   const Url="http://localhost:3000/files/"
+   const Url="https://fd-explorer-api.onrender.com/files/"
 
    const HandleCreate=()=>{
      navigate("/create")
