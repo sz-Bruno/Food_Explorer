@@ -119,8 +119,9 @@ export function Home(){
               <Header><InputHeader onChange={(e)=>setfind(e.target.value)} icon={FiSearch} placeholder="Busque pelas opções de pratos"/></Header>
              
              <MainContent>
-                  <img src={Candies} alt="Imagem de doces" />
-                  <div>
+                  
+                  <div className="banner" >
+                  <img src={Candies} alt="Imagem de doces" className="candie"/>
                        <h1>SABORES INIGUALÁVEIS</h1>
                        <p>Sinta o cuidado do preparo com ingredientes selecionados</p>
                        

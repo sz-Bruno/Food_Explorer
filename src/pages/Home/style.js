@@ -290,34 +290,28 @@ font-weight: 400;
 
 }
 
->img{
-    
+.candie{
+   width: 500px;
    position: absolute;
-    top:18px;
-    left: 70px;
+    bottom:0px;
+    left: 0px;
     animation-name:  topdown;
     animation-duration: 4s;
 
     @media(max-width:1070px){
-     width: 400px;
-     top:170px;
-     left:0px
+     width: 300px;
+    
     }
-    @media(max-width:615px){
-        width: 200px;
-        top:90px;
-        left:0px
-       }
+    
       
        @media(max-width:500px){
         width: 200px;
-        top:70px;
-        left:10px
+        
        }
 }
 
->div{
-   
+.banner{
+   position: relative;
     background-image: linear-gradient(${({theme})=>theme.COLORS.LOGO_CANDIE});
     color:blue;
     height: 260px;
@@ -363,7 +357,7 @@ font-weight: 400;
         p{
             font-size: 14px;
             line-height: 14px;
-            margin-left: 410px;
+            margin-left: 210px;
         }
     }
     @media(max-width:768px){
@@ -377,26 +371,36 @@ font-weight: 400;
         p{
             font-size: 12px;
             line-height: 12px;
-            margin-left: 410px;
+            margin-left: 210px;
         }
     }
     @media(max-width:615px){
-        width: 60%;
+       
         height: 180px;
         margin-top:20px ;
+        h1{
+            font-size: 14px;
+            line-height: 12px;
+            margin-left:280px
+        }
+        p{
+            font-size: 12px;
+            line-height: 12px;
+            margin-left: 150px;
+        }
     }
     
     @media(max-width:500px){
-        
+        max-width: 60%;
         h1{
             font-size: 12px;
             line-height: 12px;
-            margin-left:200px
+            margin-left:150px
         }
         p{
             font-size: 10px;
             line-height: 12px;
-            margin-left: 180px;
+            margin-left: 100px;
         }
     }
     
