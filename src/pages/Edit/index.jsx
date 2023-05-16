@@ -11,9 +11,9 @@ import { useState } from "react"
 import { api } from "../../services/api"
 import { useContext } from "react"
 import { AuthContext } from "../../hooks/Auth"
+
 export function Edit(){
     const {dish_id}= useContext(AuthContext)
-    
     const [ingredients,setIngredient]=useState([])
     const [newingredient,setNewIngredient]= useState('')
     const [title,setTitle]=useState('')
@@ -21,55 +21,50 @@ export function Edit(){
     const [description,setDescription]=useState('')
     const [avatarfile,setAvatarFile]=useState('')
     const qtd=0
-   
-   
 
     const  HandleIngredient= async()=>{
         setIngredient(prev=>[...prev,newingredient])
         setNewIngredient('')
     }
        
-            const HandleNewDish= async ()=>{
-                if(!title|| !price||!description|| !avatarfile){
-                    alert('Preencha todos os campos!')
-                    return
-                }
+    const HandleNewDish= async ()=>{
+        if(!title|| !price||!description|| !avatarfile){
+            alert('Preencha todos os campos!')
+            return
+        }
                
-                try {
+        try {
                   
-                const dish=
-                {
-                    title,
-                    price,
-                    description,
-                    qtd,
-                    ingredients
-                }
+            const dish={
+                title,
+                price,
+                description,
+                qtd,
+                ingredients
+            }
                
-             await api.put(`/dishes/${dish_id}`,dish).then(HandleSendPicture(dish_id))
+            await api.put(`/dishes/${dish_id}`,dish).then(HandleSendPicture(dish_id))
 
-              async function HandleSendPicture(i){
+            async function HandleSendPicture(i){
                 const formData= new FormData()
                 formData.append("avatar",avatarfile)
-        
-                  await api.patch(`/dishes/${i}`,formData)
+                await api.patch(`/dishes/${i}`,formData)
                       
-                }
-                
-                alert(`Prato ${title} editado com sucesso`)
-                
             }
-        
-              catch (error) {
-                if(error.response){
-                    alert(error.response.data.message)
-                }else{
-                     alert(`Não foi possível editar o produto`)
-                }
-                   
-                }       
+                
+            alert(`Prato ${title} editado com sucesso`)
+                
+        }
+        catch (error) {
+            if(error.response){
+                alert(error.response.data.message)
+            }else{
+                alert(`Não foi possível editar o produto`)
+            }
+          
+        }       
             
-        } 
+    } 
       
     
     return(
@@ -93,20 +88,17 @@ export function Edit(){
                                 </div>
                                 <Input title='Novo nome' placeholder='Ex.:Salada Caesar' onChange={(e)=>setTitle(e.target.value)}/>
                             </ImageArea>
-                    
                            <Ingredients_Price>
                                 <InfoArea>
                                     <p>Ingredientes</p>
                                     <InputSection>
-                                        
                                         <TagItem 
-                                        isNew 
-                                        placeholder='adicionar'
-                                        onChange={e=>setNewIngredient(e.target.value)}
-                                        value={newingredient}
-                                        onClick={HandleIngredient}
+                                         isNew 
+                                         placeholder='adicionar'
+                                         onChange={e=>setNewIngredient(e.target.value)}
+                                         value={newingredient}
+                                         onClick={HandleIngredient}
                                         />
-                                        
                                         {
                                            ingredients.map((item,id)=>(
                                             <TagItem
@@ -117,17 +109,13 @@ export function Edit(){
                                     </InputSection>
                                 </InfoArea>
                                 <div>
-                                <Input title='Novo preço' onChange={e=>setPrice(e.target.value)}/>
+                                  <Input title='Novo preço' onChange={e=>setPrice(e.target.value)}/>
                                 </div>
                           </Ingredients_Price>
-                      
                            <InfoArea>
-                                <p>Nova descrição</p>
-                                <Description onChange={e=>setDescription(e.target.value)} />
+                                 <p>Nova descrição</p>
+                                 <Description onChange={e=>setDescription(e.target.value)} />
                             </InfoArea>
-                            
-                           
-                            
                         </Form>
                         <Button onClick={HandleNewDish} >
                             <h1>Confirmar edição</h1>

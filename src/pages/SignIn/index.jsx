@@ -23,7 +23,7 @@ export function SignIn(){
                 <h1>food explorer</h1>
              </Background>
             <Form>
-                <h1>Faça o login</h1>
+               <h1>Faça o login</h1>
                <Input onChange={(e)=>setEmail(e.target.value)}  type="email" placeholder="Exemplo:Maria@mail.com" title="E-mail  "/>
                <Input onChange={(e)=>setPassword(e.target.value)} minLength ="6" type ="password" placeholder="No mínimo 6 caracteres" title="Senha"/>
                <Button onClick={(e)=>handleSignIn(e)} title="Entrar"/>
@@ -31,8 +31,6 @@ export function SignIn(){
                 criar conta
                </ButtonText>
             </Form>
-          
-           
         </SignInWrapper>
     )
 }

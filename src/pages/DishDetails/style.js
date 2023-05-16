@@ -48,18 +48,31 @@ margin-bottom: 155px;
         margin-left: 20px;
     }
 }
-@media(max-width:768px){
-    margin-bottom: 100%;
+@media(max-width:1200px){
     .details{
+        width: 60%;
         display: flex;
         flex-direction: column;
         align-items: center;
     }
 }
-@media(max-width:425px){
-    width: 300px;
+@media(max-width:768px){
    
-    padding: 0 10px;
+    padding: 0 50px;
+    margin-bottom: 100%;
+    .details{
+       margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        
+    }
+}
+@media(max-width:425px){
+    
+    padding: 0 20px;
+    
     margin-bottom: 100%;
     .details{
         display: flex;
@@ -83,7 +96,7 @@ export const Description= styled.div`
 width: 100%;
 color:white;
 @media(max-width:768px){
-    margin-top: 100px;
+  
     display: flex;
     flex-direction: column;
     gap:20px;
@@ -107,6 +120,7 @@ h1{
     line-height:56px;
     color:${({theme})=>theme.COLORS.HEADER_GRAY};
     margin-bottom: 8px;
+   
     @media(max-width:425px){
         font-size: 30px;
         line-height: 20px;
@@ -124,13 +138,18 @@ h2{
     font-size:24px;
     line-height:33px;
     color:${({theme})=>theme.COLORS.HEADER_GRAY};
+    @media(max-width:768px){
+        width: 100%;
+        font-size: 20px;
+        line-height: 20px;
+    }
     @media(max-width:425px){
-        width: 300px;
+       
         font-size: 20px;
         line-height: 20px;
     }
     @media(max-width:375px){
-        width: 200px;
+        
         font-size: 14px;
         line-height: 20px;
     }
@@ -148,7 +167,9 @@ margin-top: 47px;
 display: flex;
 gap:30px;
 align-items: center;
+
 @media(max-width:768px){
+    width: 30%;
     display: flex;
     flex-direction: column;
     >h2{
@@ -160,9 +181,9 @@ align-items: center;
        margin-top: 10px;
        gap:5px;
        
-       div{
+       .add_price{
        
-        button{
+        img{
             width: 20px;
         }
        }
@@ -179,7 +200,7 @@ font-family: 'Roboto', sans-serif;
 font-weight: 400;
 }
 
-div{
+.add_price{
     display: flex;
     gap:17px;
     align-items: center;

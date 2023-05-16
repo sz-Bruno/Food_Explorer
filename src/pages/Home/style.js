@@ -31,32 +31,14 @@ position: relative;
 margin-bottom: 98px;
 
 @media(max-width:1300px){
-    width: 80%;
-    padding:0 ;
-    justify-self: center;
+    max-width:100%;
+    padding:0 20px;
+    
 
     
 }
-@media(max-width:1070px){
-    width: 70%;
-   padding:0  ;
 
-    
-}
-@media(max-width:615px){
-    width:70%;
-   padding:20px  ;
-   
 
-    
-}
-@media(max-width:500px){
-    width:100%;
-   padding:0px 10px ;
-   
-
-    
-}
 
 .edit{
     
@@ -114,13 +96,17 @@ line-height: 24px;
     max-width:500px
   
   }
+  @media(max-width:695px){
+  padding: 0 20px;
+  
+  }
   @media(max-width:615px){
     width: 100%;
   
   }
   @media(max-width:467px){
 
-  width: 65%;
+  width: 70%;
  
   
   }
@@ -244,6 +230,7 @@ margin-right: 27px;
 margin-bottom: 8px;
 
 
+
 :hover{
     transform: scale(1.1);
     transition: all 1s;
@@ -260,7 +247,11 @@ margin-bottom: 8px;
     border-radius:50%;
     margin:35px 62px 16px;
 
-  
+    @media(max-width:765px){
+    width: 100px;
+    height: 100px;
+    
+}
 }
 
 
@@ -276,7 +267,9 @@ color: ${({theme})=>theme.COLORS.GREY_INPUT};
 font-family: 'Roboto', sans-serif;
 font-style: 'Regular';
 
-
+@media(max-width:425px){
+    font-size: 12px;
+}
 }
 >h2{
 line-height: 51px;
@@ -291,7 +284,7 @@ font-weight: 400;
 }
 
 .candie{
-   width: 500px;
+   max-width: 500px;
    position: absolute;
     bottom:0px;
     left: 0px;
@@ -361,8 +354,8 @@ font-weight: 400;
         }
     }
     @media(max-width:768px){
-      
-      
+        width: 100%;
+        padding: 0 20px;
         h1{
             font-size: 14px;
             line-height: 12px;
@@ -391,7 +384,7 @@ font-weight: 400;
     }
     
     @media(max-width:500px){
-        max-width: 60%;
+        width: 80%;
         h1{
             font-size: 12px;
             line-height: 12px;
@@ -402,6 +395,9 @@ font-weight: 400;
             line-height: 12px;
             margin-left: 100px;
         }
+    }
+    @media(max-width:435px){
+       width: 60%;
     }
     
 }
@@ -456,5 +452,10 @@ font-style: 'Bold';
 
 }
 
+@media(max-width:765px){
+    font-size: 16px;
+    line-height: 16px;
+    margin-bottom: 12px;
+}
 
 `

@@ -11,12 +11,9 @@ export function Footer(){
           </div>
           
           <Copyright>
-          &copy;
-          <p>2022 - Todos os direitos reservados.</p>
+            &copy;
+            <p>2022 - Todos os direitos reservados.</p>
           </Copyright>
-    
-           
-
         </FooterWrapper>
     )
 }

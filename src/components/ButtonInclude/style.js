@@ -14,5 +14,10 @@ font-family: 'Poppins', sans-serif;
 font-size: 14px;
 font-weight: 500;
 line-height: 24px;
+@media(max-width:765px){
+font-size: 12px;
+padding:10px;
+margin:0 auto
+}
 
 `

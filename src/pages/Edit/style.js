@@ -22,11 +22,8 @@ gap:5px;
     line-height: 16px;
     font-family: 'Roboto', sans-serif;
 }
-@media(max-width:425px){
-    width: 300px;
-}
-@media(max-width:375px){
-    width: 100px;
+@media(max-width:768px){
+    width: 100%;
 }
 
 }
@@ -53,15 +50,8 @@ margin-bottom: 194px;
     display: flex;
 }
 
-@media(max-width:1024px){
-    width: 80%;
-}
 @media(max-width:768px){
-    width: 100%;
-}
-@media(max-width:425px){
-    width: 100%;
-    padding: 10px;
+    padding:0 100px
 }
 `
 
@@ -75,7 +65,9 @@ export const Upload= styled.div`
  border:1px solid ${({theme})=>theme.COLORS.WHITE};
  border-radius: 5px;
  
-
+ @media(max-width:768px){
+    width: 100%;
+}
 label{
     display: flex;
     align-items: center;
@@ -112,6 +104,10 @@ gap:32px;
 }
    
 }
+@media(max-width:768px){
+    display: flex;
+    flex-direction:column;
+}
 
 `
 
@@ -134,6 +130,10 @@ export const Ingredients_Price= styled.div`
 
 display: flex;
 gap:48px;
+@media(max-width:768px){
+    display: flex;
+    flex-direction:column;
+}
 
 `
 export const Description= styled.textarea`
@@ -176,12 +176,16 @@ h1{
     font-weight: 500;
 }
 @media(max-width:1024px){
-    width: 200px;
+    
     margin-left: 00px;
 
 }
 @media(max-width:375px){
     margin-top: 50px;
+   
     
+}
+@media(max-width:768px){
+    width: 100%;
 }
 `

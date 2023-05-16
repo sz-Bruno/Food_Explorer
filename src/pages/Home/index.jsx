@@ -20,24 +20,25 @@ import ButtonGo from "../../assets/images/go_button.svg"
 import { useRef } from "react"
 import { ButtonInclude } from "../../components/ButtonInclude"
 import { InputHeader } from "../../components/InputHeader"
+
 export function Home(){
   const {
-   isadmin,
-   setIngredients,
-   HandleClickAddQtd,
-   HandleAddDishs,
-   HandleDetails,
-   HandleReduce,
-   setDish_id,
+    isadmin,
+    setIngredients,
+    HandleClickAddQtd,
+    HandleAddDishs,
+    HandleDetails,
+    HandleReduce,
+    setDish_id,
+    find,
+    setfind
    }= useContext(AuthContext)
- 
-
-  const navigate= useNavigate()
+   const navigate= useNavigate()
    const carousel= useRef(null)
    const carousel2= useRef(null)
    const carousel3= useRef(null)
    const [dishes, setDishes]= useState([])
-   const [find,setfind]= useState('')
+   
    const Url="https://fd-explorer-api.onrender.com/files/"
 
    const HandleCreate=()=>{
@@ -46,44 +47,33 @@ export function Home(){
    
    const HandleClickLeftPrincipal=(e)=>{
       e.preventDefault()
-     
       carousel.current.scrollLeft-= carousel.current.offsetWidth
    }
    const HandleClickRightPrincipal=(e)=>{
       e.preventDefault()
-      
       carousel.current.scrollLeft+= carousel.current.offsetWidth
    }
    const HandleClickLeftDrink=(e)=>{
       e.preventDefault()
-     
       carousel2.current.scrollLeft-= carousel.current.offsetWidth
    }
    const HandleClickRightDrink=(e)=>{
       e.preventDefault()
-      
       carousel2.current.scrollLeft+= carousel.current.offsetWidth
    }
    const HandleClickLeftDessert=(e)=>{
       e.preventDefault()
-     
       carousel3.current.scrollLeft-= carousel.current.offsetWidth
    }
    const HandleClickRightDessert=(e)=>{
       e.preventDefault()
-      
       carousel3.current.scrollLeft+= carousel.current.offsetWidth
    }
-  
-
    
    async function LoadDish(){
-       const array_dish=await api.get(`/dishes?title=${find}`)
-       
+      const array_dish=await api.get(`/dishes?title=${find}`)
       setDishes(array_dish.data.map(item=>item.dish))
       setIngredients(array_dish.data.map(item=>item.ingredients))
-      
-   
    }
    
    const HandleDeleteDish=(id)=>{
@@ -94,159 +84,143 @@ export function Home(){
          LoadDish()
       }else{
          return
-      }
-      
+      } 
    }
    const HandleEditDish=(id)=>{
-      
       setDish_id(id)
       navigate('/edit')
-
    }
+    
 
   useEffect(()=>{
-   
-   LoadDish()
-  
-  },[find])
+     LoadDish()
+ },[find])
 
-  
-
-
-   
-     return(
+   return(
          <TesteWrapper>
-              <Header><InputHeader onChange={(e)=>setfind(e.target.value)} icon={FiSearch} placeholder="Busque pelas opções de pratos"/></Header>
-             
+              <Header>
+                <InputHeader onChange={(e)=>setfind(e.target.value)} icon={FiSearch} placeholder="Busque pelas opções de pratos"/>
+               </Header>
              <MainContent>
-                  
                   <div className="banner" >
-                  <img src={Candies} alt="Imagem de doces" className="candie"/>
-                       <h1>SABORES INIGUALÁVEIS</h1>
-                       <p>Sinta o cuidado do preparo com ingredientes selecionados</p>
-                       
+                    <img src={Candies} alt="Imagem de doces" className="candie"/>
+                     <h1>SABORES INIGUALÁVEIS</h1>
+                     <p>Sinta o cuidado do preparo com ingredientes selecionados</p> 
                   </div>
                   {isadmin&&
-                     <button onClick={HandleCreate} className="add_dish">Criar prato <FiPlus size={20}/></button >}
-                    <Section title="Pratos principais">
-
-                    
-
-                       <div className="carousel" ref={carousel}>
-                        <button onClick={HandleClickLeftPrincipal} className="left"><img src={ButtonBack} alt="voltar" /></button>
-                       
-                       
+                     <button onClick={HandleCreate} className="add_dish">Criar prato <FiPlus size={20}/></button >
+                  }
+                  <Section title="Pratos principais">
+                     <div className="carousel" ref={carousel}>
+                        <button onClick={HandleClickLeftPrincipal} className="left">
+                           <img src={ButtonBack} alt="voltar" />
+                        </button>
                        {
                           dishes.filter(dish=>dish.category==='principals').map((dish,id)=>(
-                           
-                           <div className="Dish_Wrapper" key={id}>
-                              {isadmin&&
-                                  <div className="button_admin">
-                                  <button onClick={()=>HandleEditDish(dish.id)} className="edit"><FiEdit/></button>
-                                  <button onClick={()=>HandleDeleteDish(dish.id)} className="delete"><FiXSquare/></button></div>
-                                 }
-                              <img src={`${Url}${dish.avatar}`} alt="Foto do prato" />
-                              <DishDetails onClick={()=>HandleDetails(dish.id)} to ='/details'>
-                               <h1>{dish.title}&gt;</h1>
-                              </DishDetails>
-                              <p>{dish.description}</p>
-                              <h2>R$ {dish.price}</h2>
-                               <div className="Add_Area">
-                                 <div>
-                                    <button onClick={()=>HandleReduce(dish.title,dish.qtd,dishes)}><img src={Less}  /></button>
-                                    <h3 >{dish.qtd>9?dish.qtd:`0${dish.qtd}`}</h3>
-                                    <button onClick={()=>HandleClickAddQtd(dish.id,dish.title,dish.price,`${Url}${dish.avatar}`,dish.qtd,dishes)}><img src={Plus}  /></button>
-                                 </div>
-                                 <ButtonInclude onClick={()=>HandleAddDishs(dish.title,dish.qtd)} title='incluir'/>
-                               </div>
-                                    
-                           </div>
+                             <div className="Dish_Wrapper" key={id}>
+                                 {isadmin&&
+                                    <div className="button_admin">
+                                     <button onClick={()=>HandleEditDish(dish.id)} className="edit"><FiEdit/></button>
+                                     <button onClick={()=>HandleDeleteDish(dish.id)} className="delete"><FiXSquare/></button>
+                                    </div>
+                                  }
+                                 <img src={`${Url}${dish.avatar}`} alt="Foto do prato" />
+                                 <DishDetails onClick={()=>HandleDetails(dish.id)} to ='/details'>
+                                    < h1>{dish.title}&gt;</h1>
+                                 </DishDetails>
+                                 <p>{dish.description}</p>
+                                 <h2>R$ {dish.price}</h2>
+                                 <div className="Add_Area">
+                                     <div>
+                                        <button onClick={()=>HandleReduce(dish.title,dish.qtd,dishes)}><img src={Less}  /></button>
+                                        <h3 >{dish.qtd>9?dish.qtd:`0${dish.qtd}`}</h3>
+                                        <button onClick={()=>HandleClickAddQtd(dish.id,dish.title,dish.price,`${Url}${dish.avatar}`,dish.qtd,dishes)}><img src={Plus}  /></button>
+                                     </div>
+                                     <ButtonInclude onClick={()=>HandleAddDishs(dish.title,dish.qtd)} title='incluir'/>
+                                 </div>      
+                             </div>
                           ))
                        }
-                      
-                            <button onClick={HandleClickRightPrincipal} className="right"><img src={ButtonGo} alt="avançar"/></button>
-                       </div>
+                        <button onClick={HandleClickRightPrincipal} className="right"><img src={ButtonGo} alt="avançar"/></button>
+                     </div>
+                  </Section>
 
-                    </Section>
-
-                    <Section title="Bebidas">
+                  <Section title="Bebidas">
                     <div className="carousel" ref={carousel2}>
-                        <button onClick={HandleClickLeftDrink} className="left"><img src={ButtonBack} alt="voltar" /></button>
-                       
-                       
+                        <button onClick={HandleClickLeftDrink} className="left">
+                           <img src={ButtonBack} alt="voltar" />
+                        </button>
                         {
                           dishes.filter(dish=>dish.category==='drinks').map((dish,id)=>(
-                           
-                           <div className="Dish_Wrapper" key={id}>
-                              {isadmin&&
-                                  <div className="button_admin">
-                                  <button onClick={()=>HandleEditDish(dish.id,'drinks')} className="edit"><FiEdit/></button>
-                                  <button onClick={()=>HandleDeleteDish(dish.id)} className="delete"><FiXSquare/></button></div>
-                                 }
-                              <img src={`${Url}${dish.avatar}`} alt="Foto do prato" />
-                              <DishDetails onClick={()=>HandleDetails(dish.id)} to ='/details'>
-                               <h1>{dish.title}&gt;</h1>
-                              </DishDetails>
-                              <p>{dish.description}</p>
-                              <h2>R$ {dish.price}</h2>
-                               <div className="Add_Area">
-                                 <div>
-                                    <button onClick={()=>HandleReduce(dish.title,dish.qtd,dishes)}><img src={Less}  /></button>
-                                    <h3>{dish.qtd>9?dish.qtd:`0${dish.qtd}`}</h3>
-                                    <button onClick={()=>HandleClickAddQtd(dish.id,dish.title,dish.price,`${Url}${dish.avatar}`,dish.qtd,dishes)}><img src={Plus}  /></button>
-                                 </div>
-                                 <ButtonInclude onClick={()=>HandleAddDishs(dish.title,dish.qtd)} title='incluir'/>
-                               </div>
-
-                           </div>
+                             <div className="Dish_Wrapper" key={id}>
+                                {isadmin&&
+                                   <div className="button_admin">
+                                    <button onClick={()=>HandleEditDish(dish.id,'drinks')} className="edit"><FiEdit/></button>
+                                    <button onClick={()=>HandleDeleteDish(dish.id)} className="delete"><FiXSquare/></button>
+                                   </div>
+                                }
+                                <img src={`${Url}${dish.avatar}`} alt="Foto do prato" />
+                                <DishDetails onClick={()=>HandleDetails(dish.id)} to ='/details'>
+                                 <h1>{dish.title}&gt;</h1>
+                                </DishDetails>
+                                <p>{dish.description}</p>
+                                <h2>R$ {dish.price}</h2>
+                                <div className="Add_Area">
+                                   <div>
+                                      <button onClick={()=>HandleReduce(dish.title,dish.qtd,dishes)}><img src={Less}  /></button>
+                                      <h3>{dish.qtd>9?dish.qtd:`0${dish.qtd}`}</h3>
+                                      <button onClick={()=>HandleClickAddQtd(dish.id,dish.title,dish.price,`${Url}${dish.avatar}`,dish.qtd,dishes)}><img src={Plus}  /></button>
+                                   </div>
+                                   <ButtonInclude onClick={()=>HandleAddDishs(dish.title,dish.qtd)} title='incluir'/>
+                                </div>
+                             </div>
                           ))
                        }
                        
-                            <button onClick={HandleClickRightDrink} className="right"><img src={ButtonGo} alt="avançar"/></button>
-                       </div>
+                        <button onClick={HandleClickRightDrink} className="right"><img src={ButtonGo} alt="avançar"/></button>
+                     </div>
                        
-                    </Section>
+                  </Section>
 
-                    <Section title="Sobremesas">
+                  <Section title="Sobremesas">
                     <div className="carousel" ref={carousel3}>
-                        <button onClick={HandleClickLeftDessert} className="left"><img src={ButtonBack} alt="voltar" /></button>
-                       
-                       
+                        <button onClick={HandleClickLeftDessert} className="left">
+                           <img src={ButtonBack} alt="voltar" />
+                        </button>
                         
                        {
                           dishes.filter(dish=>dish.category==='desserts').map((dish,id)=>(
-                           
-                           <div className="Dish_Wrapper" key={id}>
-                              {isadmin&&
-                                  <div className="button_admin">
-                                  <button onClick={()=>HandleEditDish(dish.id,'desserts')} className="edit"><FiEdit/></button>
-                                  <button onClick={()=>HandleDeleteDish(dish.id)} className="delete"><FiXSquare/></button></div>
-                                 }
-                              <img src={`${Url}${dish.avatar}`} alt="Foto do prato" />
-                              <DishDetails onClick={()=>HandleDetails(dish.id)} to ='/details'>
-                               <h1>{dish.title}&gt;</h1>
-                              </DishDetails>
-                              <p>{dish.description}</p>
-                              <h2>R$ {dish.price}</h2>
-                               <div className="Add_Area">
-                                 <div>
-                                    <button onClick={()=>HandleReduce(dish.title,dish.qtd,dishes)}><img src={Less}  /></button>
-                                    <h3>{dish.qtd>9?dish.qtd:`0${dish.qtd}`}</h3>
-                                    <button onClick={()=>HandleClickAddQtd(dish.id,dish.title,dish.price,`${Url}${dish.avatar}`,dish.qtd,dishes)}><img src={Plus}  /></button>
-                                 </div>
-                                 <ButtonInclude onClick={()=>HandleAddDishs(dish.title,dish.qtd)} title='incluir'/>
-                               </div>
-
-                           </div>
+                             <div className="Dish_Wrapper" key={id}>
+                                {isadmin&&
+                                   <div className="button_admin">
+                                    <button onClick={()=>HandleEditDish(dish.id,'desserts')} className="edit"><FiEdit/></button>
+                                    <button onClick={()=>HandleDeleteDish(dish.id)} className="delete"><FiXSquare/></button>
+                                   </div>
+                                }
+                                <img src={`${Url}${dish.avatar}`} alt="Foto do prato" />
+                                <DishDetails onClick={()=>HandleDetails(dish.id)} to ='/details'>
+                                 <h1>{dish.title}&gt;</h1>
+                                </DishDetails>
+                                <p>{dish.description}</p>
+                                <h2>R$ {dish.price}</h2>
+                                <div className="Add_Area">
+                                   <div>
+                                      <button onClick={()=>HandleReduce(dish.title,dish.qtd,dishes)}><img src={Less}  /></button>
+                                      <h3>{dish.qtd>9?dish.qtd:`0${dish.qtd}`}</h3>
+                                      <button onClick={()=>HandleClickAddQtd(dish.id,dish.title,dish.price,`${Url}${dish.avatar}`,dish.qtd,dishes)}><img src={Plus}  /></button>
+                                   </div>
+                                  <ButtonInclude onClick={()=>HandleAddDishs(dish.title,dish.qtd)} title='incluir'/>
+                                </div>
+                             </div>
                           ))
                        }
                        
-                            <button onClick={HandleClickRightDessert} className="right"><img src={ButtonGo} alt="avançar"/></button>
-                       </div>
+                        <button onClick={HandleClickRightDessert} className="right"><img src={ButtonGo} alt="avançar"/></button>
+                     </div>
                        
-                    </Section>
-                </MainContent>
+                  </Section>
+               </MainContent>
               <Footer/>
-         </TesteWrapper>
-       )
+      </TesteWrapper>
+   )
 }

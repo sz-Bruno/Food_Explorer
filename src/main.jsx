@@ -14,13 +14,10 @@ import { AuthProvider } from './hooks/Auth'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <GloalStyle/>
-    <AuthProvider>
-    <Routes/>
-    </AuthProvider>
-      
-      
+        <GloalStyle/>
+        <AuthProvider>
+          <Routes/>
+       </AuthProvider>
     </ThemeProvider>
-    
   </React.StrictMode>,
 )

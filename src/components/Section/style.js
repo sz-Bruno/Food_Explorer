@@ -26,7 +26,7 @@ margin-top: 35px;
    font-size:26px;
    line-height:20px;
    @media(max-width:768px){
-        
+        padding: 0 100px;
         margin-bottom: 50px;
     
 }

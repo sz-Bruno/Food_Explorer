@@ -18,12 +18,8 @@ import { useState,useEffect } from "react"
 import { useContext } from "react"
 import { AuthContext } from "../../hooks/Auth"
 
-
-
-    
 export function PaymentArea(){
- const {selectedDishs,setSelectedDishs,HandleDeleteDishs}= useContext(AuthContext)
-
+  const {selectedDishs,setSelectedDishs,HandleDeleteDishs}= useContext(AuthContext)
   const [isPixVisible, setisPixVisible]= useState(false)
   const [isCardVisible, setisCardVisible]= useState(true)
   const [isClockVisible,setisClockVisible]= useState(false)
@@ -44,7 +40,6 @@ export function PaymentArea(){
     setisDeliveredVisible(false)
     setisButtonPixActived(false)
     setisButtonCardActived(true)
-    
     
   }
   function HandlePixOption(){
@@ -85,68 +80,54 @@ export function PaymentArea(){
     
   }
     
-   
-    
-    const HandlePrice=(array)=>{
-      let total=0
+  const HandlePrice=(array)=>{
+    let total=0
 
-      for (let i=0; i<array.length;i++){
-
-        total+= array[i]
-         
-      }
-
-       total=total.toFixed(2)
-      settotal_price( total)
-   
+    for (let i=0; i<array.length;i++){
+      total+= array[i]    
     }
 
-    const prices= selectedDishs.map(item=>item.qtd===1?item.price: item.price*item.qtd)
-    
-   useEffect(()=>{
+    total=total.toFixed(2)
+    settotal_price( total)
+   
+  }
 
-      HandlePrice(prices)
-    },[prices])
+  const prices= selectedDishs.map(item=>item.qtd===1?item.price: item.price*item.qtd)
+    
+  useEffect(()=>{
+    HandlePrice(prices)
+  },[prices])
      
     
-     
-    
-    
-    return(
-        <PaymentWrapper >
+  return(
+      <PaymentWrapper >
             <Header/>
             <Payment >
-                <Section title="Meu pedido"  total={total_price}   >
-
+                <Section title="Meu pedido"  total={total_price} >
                   {selectedDishs.map((item,id)=>
-                  <Description
-                  key={id}
-                  onClick={()=>HandleDeleteDishs(item.title)}
-                   
-                  image={item.image}
-                  qtd={item.qtd}
-                  name={item.title}
-                  price={((item.price)*item.qtd).toFixed(2)}
-                  />
-                  )}
-                    
-                 </Section>
-
+                    <Description
+                      key={id}
+                      onClick={()=>HandleDeleteDishs(item.title)}
+                      image={item.image}
+                      qtd={item.qtd}
+                      name={item.title}
+                      price={((item.price)*item.qtd).toFixed(2)}
+                      />
+                   )}
+                </Section>
                 <Section title="Pagamento">
                   <CashSection>
                      <div>
                        <ButtonPayment onClick={HandlePixOption}  img={Pix} disabled={isButtonPixDisabled} isactive={isButtonPixActived} title="PIX" />
                        <ButtonPayment   onClick={HandleCardOption} img={Credit} disabled={isButtonCardDisabled} isactive={isButtonCardActived} title="Crédito"/>
                       </div>
-                     
-                     
-                        {isPixVisible&&
+                      {isPixVisible&&
                         <PixArea>
                           <img src={QR} alt="Logo do QR Code" />
                           <Button onClick={HandlePayment} img={buttonHeader} title='Finalizar Pagamento'/>
                         </PixArea>
-                        }
-                         {isCardVisible&&
+                      }
+                      {isCardVisible&&
                         <CardArea>
                           <Input type= 'number' placeholder='0000 0000 0000 0000 ' title='número do cartão'/>
                             <div>
@@ -155,43 +136,31 @@ export function PaymentArea(){
                             </div>
                           <Button type ='submit' onClick={HandlePayment} img={buttonHeader} title='Finalizar Pagamento'/>
                         </CardArea>
-                        }
-
-                        {isClockVisible&&
+                      }
+                      {isClockVisible&&
                         <WaitArea>
                           <img src={Clock} alt="Aguardando aprovação" />
                           <h1>Aguardando aprovação do pagamento...</h1>
-                          
                         </WaitArea>
-                        } 
-                        {isApprovedVisible&&
+                      } 
+                      {isApprovedVisible&&
                         <WaitArea>
                           
                           <img src={Approved} alt="Aguardando aprovação" />
                           <h1>Pagamento aprovado!</h1>
-                          
                         </WaitArea>
-                        } 
-
-                        {isDeliveredVisible&&
+                      } 
+                      {isDeliveredVisible&&
                         <WaitArea>
                           
                           <img src={Delivered} alt="Aguardando aprovação" />
                           <h1>Pedido entregue!</h1>
-                          
                         </WaitArea>
-                        } 
-                      
-
-    
-                  
+                      } 
                   </CashSection>
-
                 </Section>
-            </Payment>
-
-            <Footer/>
-
-        </PaymentWrapper>
-    )
+          </Payment>
+             <Footer/>
+       </PaymentWrapper>
+  )
 }

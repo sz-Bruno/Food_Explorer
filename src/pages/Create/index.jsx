@@ -28,44 +28,37 @@ export function Create(){
         setNewIngredient('')
     }
        
-            const HandleNewDish= async ()=>{
-            try {
-                if(!title|| !price||!description|| !avatarfile){
-                    alert('Preencha todos os campos!')
-                    return
-                }
-                const dish=
-                {
-                    title,
-                    price,
-                    description,
-                    qtd,
-                    category,
-                    ingredients
-                    
-                }
-             await api.post(`/dishes`,dish).then(response=>HandleSendPicture(response.data))
+    const HandleNewDish= async ()=>{
+       try {
+         if(!title|| !price||!description|| !avatarfile){
+             alert('Preencha todos os campos!')
+             return
+           }
+         const dish={
+             title,
+             price,
+             description,
+             qtd,
+             category,
+             ingredients           
+           }
+         await api.post(`/dishes`,dish).then(response=>HandleSendPicture(response.data))
 
-              async function HandleSendPicture(i){
-                const formData= new FormData()
-                formData.append("avatar",avatarfile)
-        
-                  await api.patch(`/dishes/${i}`,formData)
-        
-                }
-                alert(`Prato ${title} adicionado ao cardápio`)
-            }
-        
-              catch (error) {
+          async function HandleSendPicture(i){
+             const formData= new FormData()
+             formData.append("avatar",avatarfile)
+             await api.patch(`/dishes/${i}`,formData)
+           }
+          alert(`Prato ${title} adicionado ao cardápio`)
+       }
+        catch (error) {
                 if(error.response){
                     alert(error.response.data.message)
                 }else{
                      alert(`Não foi possível adicionar o produto ao cardápio`)
-                }
-                   
-                }       
-            
-        } 
+                }   
+            }           
+    } 
       
     
     return(
@@ -122,15 +115,14 @@ export function Create(){
                                 <Description onChange={e=>setDescription(e.target.value)} />
                             </InfoArea>
                             <div className="option_field">
-                                <p>Selecione o Cardápio</p>
-                            <select className="select_field" onChange={(e)=>setCategory(e.target.value)} name="options_dish" id="options_dish">
-                                 <option value=""></option>
-                                <option value="principals"> Pratos Principais</option>
-                                <option value="drinks">Bebidas</option>
-                                <option value="desserts">Sobremesas</option>
-                           </select>
+                                  <p>Selecione o Cardápio</p>
+                              <select className="select_field" onChange={(e)=>setCategory(e.target.value)} name="options_dish" id="options_dish">
+                                  <option value=""></option>
+                                  <option value="principals"> Pratos Principais</option>
+                                  <option value="drinks">Bebidas</option>
+                                  <option value="desserts">Sobremesas</option>
+                             </select>
                             </div>
-                            
                         </Form>
                         <Button onClick={HandleNewDish} >
                             <h1>Adicionar</h1>

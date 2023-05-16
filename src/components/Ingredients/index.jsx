@@ -5,7 +5,6 @@ export function Ingredients({image,ingredient}){
         <IngredientsWrapper>
             <img src={image} alt="ingrediente" />
             <p>{ingredient}</p>
-
         </IngredientsWrapper>
     )
 }

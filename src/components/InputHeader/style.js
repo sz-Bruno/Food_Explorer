@@ -25,18 +25,6 @@ gap:8px;
     color: ${({theme})=>theme.COLORS.GREY_INPUT};
 
 }
-@media(max-width: 1200px){
-    max-width: 200px;
-}
-@media(max-width: 675px){
-    max-width: 50px;
-    margin-right: 0;
-}
 
-@media(max-width: 425px){
-    max-width: 50px;
-    max-height: 15px;
-    margin-right: 0;
-}
 
 `

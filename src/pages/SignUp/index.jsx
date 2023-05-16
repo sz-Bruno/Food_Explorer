@@ -6,23 +6,23 @@ import { useContext } from "react"
 import { AuthContext } from "../../hooks/Auth"
 import { useState } from "react"
 export function SignUp(){
-     const [name,setName]= useState('')
-     const [email,setEmail]= useState('')
-     const [password,setPassword]= useState('')
-     const Admin=0
+    const [name,setName]= useState('')
+    const [email,setEmail]= useState('')
+    const [password,setPassword]= useState('')
+    const Admin=0
     const {SignUp}=useContext(AuthContext)
+
     function handleSignUp(e){
         e.preventDefault()
         SignUp({name,email,password,Admin})
-        
     }
 
     return(
         <SignUpWrapper>
-             <Background>
+            <Background>
                 <img src={logo} alt="Logo da Explorer"  />
                 <h1>food explorer</h1>
-             </Background>
+            </Background>
             <Form>
                 <h1>Crie sua conta</h1>
                <Input placeholder="Exemplo:Maria da Silva" title="Nome" onChange={(e)=>setName(e.target.value)}/>
@@ -33,8 +33,6 @@ export function SignUp(){
                Já tenho uma conta
                </ButtonText>
             </Form>
-          
-           
         </SignUpWrapper>
     )
 }
