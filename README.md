@@ -44,7 +44,7 @@ O usuário irá visualizar todos os pratos cadastrados e, quando clicar em um pr
 ## Executando o front end
 Clone o projeto front end em sua máquina
 ```bash
- git@github.com:sz-Bruno/Food_Explorer.git
+$ git clone git@github.com:sz-Bruno/Food_Explorer.git
 ```
 
 ```bash
