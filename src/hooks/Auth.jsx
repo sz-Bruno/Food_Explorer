@@ -45,11 +45,12 @@ function AuthProvider({children}){
           const {User,token}= response.data
           localStorage.setItem("@foodexplorer:user", JSON.stringify(User))
           localStorage.setItem("@foodexplorer:token", token)
+          localStorage.setItem("@foodexplorer:admin", JSON.stringify(User[0].Admin))
           
         
           console.log(User[0].name)
           api.defaults.headers.authorization=`Bearer ${token}`
-          setData({User,token})
+          setData({User,token,admin:User[0].Admin})
            if(User[0].Admin===1){
              setIsadmin(true)
             }else{
@@ -68,20 +69,21 @@ function AuthProvider({children}){
    function SignOut(){
       localStorage.removeItem("@foodexplorer:token")
       localStorage.removeItem("@foodexplorer:user")
-
+      localStorage.removeItem("@foodexplorer:admin")
       setData({})
     }
 
    useEffect(()=>{
       const token= localStorage.getItem("@foodexplorer:token")
       const user=localStorage.getItem("@foodexplorer:user")
-     
+      const admin= localStorage.getItem("@foodexplorer:admin")
 
-      if(user && token ){
+      if(user && token && admin){
          api.defaults.headers.authorization=`Bearer ${token}`
           setData({
               token,
               User:JSON.parse(user),
+              admin:JSON.parse(admin)
               
           })
         }
@@ -192,7 +194,7 @@ function AuthProvider({children}){
          SignOut,
          User:data.User,
          setIngredients,
-         isadmin,
+         isadmin:data.admin,
          count,
          find,
          setfind,
